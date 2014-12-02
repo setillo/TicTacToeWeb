@@ -1,7 +1,5 @@
 package es.art83.ticTacToe.view;
 
-import java.util.Map;
-
 import javax.faces.bean.ManagedProperty;
 
 import es.art83.ticTacToe.controller.Login;
@@ -11,14 +9,7 @@ public class LoginView extends Bean {
     @ManagedProperty(value = "#{login}")
     private Login login;
 
-    @ManagedProperty(value = "#{sessionScope}")
-    private Map<String, Object> sessionMap;
-
     private User user = new User();
-
-    public void setSessionMap(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
-    }
 
     public Login getLogin() {
         return login;
@@ -37,7 +28,7 @@ public class LoginView extends Bean {
     }
     
     public void session(){
-        this.sessionMap.put("user", this.user.getUser());
+        this.getSessionMap().put("user", this.user.getUser());
     }
 
 }
