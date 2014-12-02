@@ -6,6 +6,15 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 public class LoginOld extends LoginView {
+    private boolean bye=false;
+    
+    public boolean isBye() {
+        return bye;
+    }
+
+    public void setBye(boolean bye) {
+        this.bye = bye;
+    }
 
     public String process() {
         boolean ok = this.getLogin().read(this.getUser());
