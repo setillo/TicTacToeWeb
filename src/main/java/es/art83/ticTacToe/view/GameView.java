@@ -1,7 +1,6 @@
 package es.art83.ticTacToe.view;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -9,17 +8,16 @@ import es.art83.ticTacToe.controller.Login;
 
 @ManagedBean(name = "game")
 public class GameView extends Bean {
-    @ManagedProperty(value = "#{loginOld}")
-    private LoginOld loginOld;
+    private String bye = "";
 
-    public void setLoginOld(LoginOld loginOld) {
-        this.loginOld = loginOld;
+    public String getBye() {
+        return bye;
     }
 
     public String logout() {
         this.getSessionMap().put("user", null);
-        LogManager.getLogger(Login.class.getName()).info("Sesion cerrada: ");
-        this.loginOld.setBye("Bye!!");
+        LogManager.getLogger(Login.class.getName()).info("Sesion cerrada");
+        this.bye="Bye!!";
         return "/loginOld";
     }
 }

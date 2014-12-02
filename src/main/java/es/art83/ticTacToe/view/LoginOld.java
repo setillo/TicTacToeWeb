@@ -10,15 +10,6 @@ import es.art83.ticTacToe.controller.Login;
 
 @ManagedBean
 public class LoginOld extends LoginView {
-    private String bye = "";
-
-    public String getBye() {
-        return bye;
-    }
-
-    public void setBye(String bye) {
-        this.bye = bye;
-    }
 
     public String process() {
         boolean ok = this.getLogin().read(this.getUser());
