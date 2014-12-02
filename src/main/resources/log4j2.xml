@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%-5level] %d{dd-MMM HH:mm:ss} (%t) %c{3} >>> %msg%n" />
+		</Console>
+		<File name="File" fileName="target/surefire-reports/logs.txt">
+			<PatternLayout pattern="[%-5level] %d{dd-MMM HH:mm:ss} (%t) %c{3} >>> %msg%n" />
+		</File>
+	</appenders>
+	<loggers>
+		<root level="debug">
+            <appender-ref ref="Console" />
+            <!-- <appender-ref ref="File" /> -->
+		</root>
+	</loggers>
+</configuration> 

@@ -4,15 +4,19 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.apache.logging.log4j.LogManager;
+
+import es.art83.ticTacToe.controller.Login;
+
 @ManagedBean
 public class LoginOld extends LoginView {
-    private boolean bye=false;
-    
-    public boolean isBye() {
+    private String bye = "";
+
+    public String getBye() {
         return bye;
     }
 
-    public void setBye(boolean bye) {
+    public void setBye(String bye) {
         this.bye = bye;
     }
 
@@ -23,10 +27,11 @@ public class LoginOld extends LoginView {
                     new FacesMessage("usuario o clave incorrecta"));
             return "loginOld";
         } else {
-            // Se añade user a la sesión
-            // se prepara siguiente caso de uso...
-            System.out.println("Usuario registrado: " + this.getUser());
-            return null;
+            this.session();
+            LogManager.getLogger(Login.class.getName()).info(
+                    "Usuario Logeado: " + this.getUser().toString());
+
+            return "logged/game";
         }
 
     }

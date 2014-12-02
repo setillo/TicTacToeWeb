@@ -4,6 +4,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.apache.logging.log4j.LogManager;
+
+import es.art83.ticTacToe.controller.Login;
+
 @ManagedBean
 public class LoginNew extends LoginView {
     private String password2;
@@ -28,10 +32,10 @@ public class LoginNew extends LoginView {
                         new FacesMessage("Usuario ya registrado"));
                 return null;
             } else {
-                // Se añade user a la sesión
-                // se prepara siguiente caso de uso...
-                System.out.println("Usuario registrado: " + this.getUser());
-                return null;
+                this.session();
+                LogManager.getLogger(Login.class.getName()).info(
+                        "Usuario Registrado: " + this.getUser().toString());
+                return "logged/game";
             }
         }
     }
