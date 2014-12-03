@@ -13,9 +13,9 @@
 		<h:panelGrid columns="2">
 			<h:messages for="loginViewBean" style="color:red" />
 			<h:outputText value="#{gameViewBean.bye}" /> 
-			<h:inputText id="user" value="#{loginViewBean.user.user}" />
+			<h:inputText id="user" value="#{loginViewBean.player.user}" />
 			<h:outputText value="" />
-			<h:inputText id="password" value="#{loginViewBean.user.password}" />
+			<h:inputText id="password" value="#{loginViewBean.player.password}" />
 			<h:outputText value="" />
 			<h:commandButton value="Login" action="#{loginViewBean.process}" />
 			<h:commandButton value="Register" action="register.jsf" />

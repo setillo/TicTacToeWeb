@@ -4,14 +4,14 @@ import javax.faces.bean.ManagedBean;
 
 import es.art83.ticTacToe.controllers.LoginController;
 import es.art83.ticTacToe.models.daos.DAOFactory;
-import es.art83.ticTacToe.models.entities.UserEntity;
+import es.art83.ticTacToe.models.entities.PlayerEntity;
 
 @ManagedBean(name = "loginController")
 public class LoginControllerEJB implements LoginController {
 
     @Override
-    public boolean read(UserEntity user) {
-        UserEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
+    public boolean read(PlayerEntity user) {
+        PlayerEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
         if (userBD == null) {
             return false;
         } else {
@@ -20,8 +20,8 @@ public class LoginControllerEJB implements LoginController {
     }
 
     @Override
-    public boolean create(UserEntity user) {
-        UserEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
+    public boolean create(PlayerEntity user) {
+        PlayerEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
         if (userBD != null) {
             return false;
         } else {

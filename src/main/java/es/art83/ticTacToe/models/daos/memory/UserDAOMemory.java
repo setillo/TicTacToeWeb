@@ -1,12 +1,12 @@
 package es.art83.ticTacToe.models.daos.memory;
 
-import es.art83.ticTacToe.models.daos.UserDAO;
-import es.art83.ticTacToe.models.entities.UserEntity;
+import es.art83.ticTacToe.models.daos.PlayerDAO;
+import es.art83.ticTacToe.models.entities.PlayerEntity;
 
-public class UserDAOMemory extends GenericDAOMemory<UserEntity, String> implements UserDAO {
+public class UserDAOMemory extends GenericDAOMemory<PlayerEntity, String> implements PlayerDAO {
 
     @Override
-    protected String getId(UserEntity entity) {
+    protected String getId(PlayerEntity entity) {
         return entity.getUser();
     }
 

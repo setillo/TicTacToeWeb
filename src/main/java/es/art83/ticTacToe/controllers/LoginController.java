@@ -1,11 +1,11 @@
 package es.art83.ticTacToe.controllers;
 
-import es.art83.ticTacToe.models.entities.UserEntity;
+import es.art83.ticTacToe.models.entities.PlayerEntity;
 
 public interface LoginController {
 
-    boolean read(UserEntity user);
+    boolean read(PlayerEntity user);
 
-    boolean create(UserEntity user);
+    boolean create(PlayerEntity user);
 
 }

@@ -1,17 +1,17 @@
 package es.art83.ticTacToe.models.daos.memory;
 
 import es.art83.ticTacToe.models.daos.DAOFactory;
-import es.art83.ticTacToe.models.daos.UserDAO;
+import es.art83.ticTacToe.models.daos.PlayerDAO;
 
 public class DAOMemoryFactory extends DAOFactory {
 
-    private UserDAO memUserDAO = new UserDAOMemory();
+    private PlayerDAO memUserDAO = new UserDAOMemory();
 
     public DAOMemoryFactory() {
     }
 
     @Override
-    public UserDAO getUserDAO() {
+    public PlayerDAO getUserDAO() {
         return memUserDAO;
     }
 

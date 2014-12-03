@@ -16,6 +16,6 @@ public abstract class DAOFactory {
         return factory;
     }
 
-    public abstract UserDAO getUserDAO();
+    public abstract PlayerDAO getUserDAO();
 
 }

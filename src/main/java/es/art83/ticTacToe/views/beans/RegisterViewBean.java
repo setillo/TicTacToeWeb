@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import es.art83.ticTacToe.controllers.LoginController;
 
 @ManagedBean
-public class RegisterViewBean extends UserViewBean {
+public class RegisterViewBean extends PlayerViewBean {
     private String password2;
 
     public String getPassword2() {
@@ -21,12 +21,12 @@ public class RegisterViewBean extends UserViewBean {
     }
 
     public String process() {
-        if (!this.getUser().getPassword().equals(this.password2)) {
+        if (!this.getPlayer().getPassword().equals(this.password2)) {
             FacesContext.getCurrentInstance().addMessage("registerViewBean:password",
                     new FacesMessage("Claves direrentes"));
             return null;
         } else {
-            boolean ok = this.getLogin().create(this.getUser());
+            boolean ok = this.getLogin().create(this.getPlayer());
             if (!ok) {
                 FacesContext.getCurrentInstance().addMessage("registerViewBean:user",
                         new FacesMessage("Usuario ya registrado"));
@@ -34,7 +34,7 @@ public class RegisterViewBean extends UserViewBean {
             } else {
                 this.sessionRegister();
                 LogManager.getLogger(LoginController.class.getName()).info(
-                        "Usuario Registrado: " + this.getUser().toString());
+                        "Usuario Registrado: " + this.getPlayer().toString());
                 return "logged/game";
             }
         }

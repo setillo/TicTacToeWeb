@@ -1,16 +1,16 @@
 package es.art83.ticTacToe.models.entities;
 
-public class UserEntity {
+public class PlayerEntity {
     private String user;
 
     private String password;
 
-    public UserEntity(String user, String password) {
+    public PlayerEntity(String user, String password) {
         this.user = user;
         this.password = password;
     }
 
-    public UserEntity() {
+    public PlayerEntity() {
         this("", "");
     }
 
@@ -43,7 +43,7 @@ public class UserEntity {
     @Override
     public boolean equals(Object obj) {
         assert obj != null;
-        UserEntity other = (UserEntity) obj;
+        PlayerEntity other = (PlayerEntity) obj;
         return this.user.equals(other.user);
     }
 

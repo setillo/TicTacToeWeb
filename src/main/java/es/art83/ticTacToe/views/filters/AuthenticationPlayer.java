@@ -1,4 +1,4 @@
-package es.art83.ticTacToe.views.utils;
+package es.art83.ticTacToe.views.filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/logged/*")
-public class AuthenticationUser implements Filter {
+public class AuthenticationPlayer implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {

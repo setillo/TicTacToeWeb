@@ -11,9 +11,9 @@
 	<h1>Tic Tac Toe</h1>
 	<h:form id="registerViewBean">
 		<h:panelGrid columns="2">
-			<h:inputText id="user" value="#{registerViewBean.user.user}" />
+			<h:inputText id="user" value="#{registerViewBean.player.user}" />
 			<h:message for="user" style="color:red" />
-			<h:inputText id="password" value="#{registerViewBean.user.password}" />
+			<h:inputText id="password" value="#{registerViewBean.player.password}" />
 			<h:message for="password" style="color:red" />
 			<h:inputText value="#{registerViewBean.password2}" />
 			<h:outputText value="" />
