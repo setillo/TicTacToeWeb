@@ -5,6 +5,7 @@ import javax.faces.bean.ManagedBean;
 import es.art83.ticTacToe.controllers.LoginController;
 import es.art83.ticTacToe.models.daos.DAOFactory;
 import es.art83.ticTacToe.models.entities.PlayerEntity;
+import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 @ManagedBean(name = "loginController")
 public class LoginControllerEJB implements LoginController {
@@ -28,6 +29,11 @@ public class LoginControllerEJB implements LoginController {
             DAOFactory.getFactory().getUserDAO().create(user);
             return true;
         }
+    }
+
+    @Override
+    public TicTacToeStateModel ticTacToeState() {
+        return TicTacToeStateModel.INITIAL;
     }
 
 }

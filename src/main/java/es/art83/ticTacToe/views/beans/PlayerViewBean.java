@@ -11,14 +11,14 @@ public class PlayerViewBean extends ViewBean {
 
     private PlayerEntity playerEntity = new PlayerEntity();
 
-    public LoginController getLogin() {
-        return loginController;
-    }
-    
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
-
+    
+    public LoginController getLoginController() {
+        return loginController;
+    }
+    
     public PlayerEntity getPlayer() {
         return playerEntity;
     }
@@ -27,7 +27,6 @@ public class PlayerViewBean extends ViewBean {
         this.playerEntity = playerEntity;
     }
 
-  
     public void sessionRegister(){
         this.getSessionMap().put("user", this.playerEntity.getUser());
     }

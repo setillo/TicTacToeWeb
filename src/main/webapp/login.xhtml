@@ -12,11 +12,11 @@
 	<h:form id="loginViewBean">
 		<h:panelGrid columns="2">
 			<h:messages for="loginViewBean" style="color:red" />
-			<h:outputText value="#{gameViewBean.bye}" /> 
+			<h:panelGroup> <h:outputText rendered="#{loginViewBean.finalState}" value="Bye!!!" /></h:panelGroup>
 			<h:inputText id="user" value="#{loginViewBean.player.user}" />
-			<h:outputText value="" />
+			<h:outputText />
 			<h:inputText id="password" value="#{loginViewBean.player.password}" />
-			<h:outputText value="" />
+			<h:outputText />
 			<h:commandButton value="Login" action="#{loginViewBean.process}" />
 			<h:commandButton value="Register" action="register.jsf" />
 		</h:panelGrid>
