@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"        
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Tic Tac Toe</title>
+</h:head>
+<h:body>
+	<h1>Tic Tac Toe</h1>
+	<h:form id="registerView">
+		<h:panelGrid columns="2">
+			<h:inputText id="user" value="#{registerView.user.user}" />
+			<h:message for="user" style="color:red" />
+			<h:inputText id="password" value="#{registerView.user.password}" />
+			<h:message for="password" style="color:red" />
+			<h:inputText value="#{registerView.password2}" />
+			<h:outputText value="" />
+			<h:commandButton value="Register" action="#{registerView.process}" />
+			<h:commandButton value="Cancel" action="loginView.jsf" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
