@@ -18,7 +18,7 @@ public class AuthenticationUser implements Filter {
             throws IOException, ServletException {
         String login = (String) ((HttpServletRequest) request).getSession().getAttribute("user");
         if (login == null) {
-            ((HttpServletResponse) response).sendRedirect("../loginOld.xhtml");
+            ((HttpServletResponse) response).sendRedirect("../login.xhtml");
         } else {
             chain.doFilter(request, response);
         }

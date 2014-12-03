@@ -8,21 +8,21 @@ import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.LoginController;
 
-@ManagedBean (name="loginView")
+@ManagedBean
 public class LoginViewBean extends UserViewBean {
 
     public String process() {
         boolean ok = this.getLogin().read(this.getUser());
         if (!ok) {
-            FacesContext.getCurrentInstance().addMessage("loginView",
+            FacesContext.getCurrentInstance().addMessage("loginViewBean",
                     new FacesMessage("usuario o clave incorrecta"));
-            return "loginView";
+            return "login";
         } else {
             this.sessionRegister();
             LogManager.getLogger(LoginController.class.getName()).info(
                     "Usuario Logeado: " + this.getUser().toString());
 
-            return "logged/gameView";
+            return "logged/game";
         }
 
     }

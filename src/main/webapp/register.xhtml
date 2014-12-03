@@ -9,18 +9,17 @@
 </h:head>
 <h:body>
 	<h1>Tic Tac Toe</h1>
-	<h:form id="loginView">
+	<h:form id="registerViewBean">
 		<h:panelGrid columns="2">
-			<h:messages for="loginView" style="color:red" />
-			<h:outputText value="#{gameView.bye}" /> 
-			<h:inputText id="user" value="#{loginView.user.user}" />
+			<h:inputText id="user" value="#{registerViewBean.user.user}" />
+			<h:message for="user" style="color:red" />
+			<h:inputText id="password" value="#{registerViewBean.user.password}" />
+			<h:message for="password" style="color:red" />
+			<h:inputText value="#{registerViewBean.password2}" />
 			<h:outputText value="" />
-			<h:inputText id="password" value="#{loginView.user.password}" />
-			<h:outputText value="" />
-			<h:commandButton value="Login" action="#{loginView.process}" />
-			<h:commandButton value="Register" action="registerView.jsf" />
+			<h:commandButton value="Register" action="#{registerViewBean.process}" />
+			<h:commandButton value="Cancel" action="login.jsf" />
 		</h:panelGrid>
 	</h:form>
-
 </h:body>
 </html>

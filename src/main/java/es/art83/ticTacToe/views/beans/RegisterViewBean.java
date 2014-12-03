@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.LoginController;
 
-@ManagedBean (name="registerView")
+@ManagedBean
 public class RegisterViewBean extends UserViewBean {
     private String password2;
 
@@ -22,20 +22,20 @@ public class RegisterViewBean extends UserViewBean {
 
     public String process() {
         if (!this.getUser().getPassword().equals(this.password2)) {
-            FacesContext.getCurrentInstance().addMessage("registerView:password",
+            FacesContext.getCurrentInstance().addMessage("registerViewBean:password",
                     new FacesMessage("Claves direrentes"));
             return null;
         } else {
             boolean ok = this.getLogin().create(this.getUser());
             if (!ok) {
-                FacesContext.getCurrentInstance().addMessage("registerView:user",
+                FacesContext.getCurrentInstance().addMessage("registerViewBean:user",
                         new FacesMessage("Usuario ya registrado"));
                 return null;
             } else {
                 this.sessionRegister();
                 LogManager.getLogger(LoginController.class.getName()).info(
                         "Usuario Registrado: " + this.getUser().toString());
-                return "logged/gameView";
+                return "logged/game";
             }
         }
     }

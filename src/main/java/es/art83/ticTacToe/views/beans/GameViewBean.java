@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.LoginController;
 
-@ManagedBean(name = "gameView")
+@ManagedBean
 public class GameViewBean extends ViewBean {
     private String bye = "";
 
@@ -18,6 +18,6 @@ public class GameViewBean extends ViewBean {
         this.getSessionMap().put("user", null);
         LogManager.getLogger(LoginController.class.getName()).info("Sesion cerrada");
         this.bye="Bye!!";
-        return "/loginView";
+        return "/login";
     }
 }
