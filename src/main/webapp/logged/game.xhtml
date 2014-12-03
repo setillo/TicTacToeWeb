@@ -10,6 +10,25 @@
 <h:body>
 	<h1>Tic Tac Toe. Game</h1>
 
+	<h:panelGroup rendered="#{gameViewBean.existTicTacToe()}">
+		<fieldset>
+			<legend>Board</legend>
+		</fieldset>
+	</h:panelGroup>
+
+	<fieldset>
+		<legend>Start game</legend>
+		<h:form id="startGame">
+			<h:commandButton value="New game" action="#{gameViewBean.createGame}" />
+			<h:panelGroup rendered="#{gameViewBean.hasGames()}">
+				<h:selectOneMenu value="#{gameViewBean.gameNameSelected}">
+					<f:selectItems value="#{gameViewBean.gameNames}" />
+				</h:selectOneMenu>
+				<h:commandButton value="Open game" action="#{gameViewBean.openGame}" />
+			</h:panelGroup>
+		</h:form>
+	</fieldset>
+
 	<h:form id="logout">
 		<h:commandButton value="Logout" action="#{gameViewBean.logout}" />
 	</h:form>
