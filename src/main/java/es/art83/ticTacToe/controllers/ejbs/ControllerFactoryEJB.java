@@ -1,5 +1,6 @@
 package es.art83.ticTacToe.controllers.ejbs;
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -21,16 +22,18 @@ public class ControllerFactoryEJB extends ControllerFactory {
     
     private LogoutController logoutController;
 
+    private StartGameController startGameController;
+    
     //private CreateGameController createGameController;
 
     //private OpenGameController openGameController;
 
-    //private StartGameController startGameController;
 
     public ControllerFactoryEJB() {
         this.ticTacToeStatesManager = new TicTacToeStatesManager();
         this.loginController = new LoginControllerEJB(ticTacToeStatesManager);
         this.logoutController = new LogoutControllerEJB(ticTacToeStatesManager);
+        this.startGameController = new StartGameControllerEJB(ticTacToeStatesManager);
     }
 
     @Override
@@ -61,7 +64,7 @@ public class ControllerFactoryEJB extends ControllerFactory {
 
     @Override
     public StartGameController getStartGameController() {
-        return null;
+        return this.startGameController;
     }
 
 

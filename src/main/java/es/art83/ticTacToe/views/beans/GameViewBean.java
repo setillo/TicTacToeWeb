@@ -1,6 +1,5 @@
 package es.art83.ticTacToe.views.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,9 +20,7 @@ public class GameViewBean extends ViewBean {
 
     @PostConstruct
     public void update() {
-        this.gameNames = new ArrayList<String>();
-        this.gameNames.add("uno");
-        this.gameNames.add("dos");
+        this.gameNames=this.getControllerFactory().getStartGameController().readGameNames();
         LogManager.getLogger(OpenGameController.class.getName()).info(
                 "Open game: consultando partidas" + this.gameNames);
     }

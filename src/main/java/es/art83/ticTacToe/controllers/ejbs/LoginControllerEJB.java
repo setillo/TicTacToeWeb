@@ -10,11 +10,12 @@ public class LoginControllerEJB extends ControllerEJB implements LoginController
         super(ticTacToeStatesManager);
     }
 
+
     @Override
-    public boolean read(PlayerEntity user) {
-        PlayerEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
-        if (userBD != null && userBD.getPassword().equals(user.getPassword())) {
-            this.getTicTacToeStatesManager().login();
+    public boolean read(PlayerEntity player) {
+        PlayerEntity playerBD = DAOFactory.getFactory().getPlayerDAO().read(player.getUser());
+        if (playerBD != null && playerBD.getPassword().equals(player.getPassword())) {
+            this.getTicTacToeStatesManager().login(playerBD);
             return true;
         } else {
             return false;
@@ -22,11 +23,11 @@ public class LoginControllerEJB extends ControllerEJB implements LoginController
     }
 
     @Override
-    public boolean create(PlayerEntity user) {
-        PlayerEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
-        if (userBD == null) {
-            DAOFactory.getFactory().getUserDAO().create(user);
-            this.getTicTacToeStatesManager().login();
+    public boolean create(PlayerEntity player) {
+        PlayerEntity playerBD = DAOFactory.getFactory().getPlayerDAO().read(player.getUser());
+        if (playerBD == null) {
+            DAOFactory.getFactory().getPlayerDAO().create(player);
+            this.getTicTacToeStatesManager().login(player);
             return true;
         } else {
             return false;

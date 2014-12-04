@@ -1,21 +1,29 @@
 package es.art83.ticTacToe.controllers.ejbs;
 
+import es.art83.ticTacToe.models.entities.PlayerEntity;
 import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class TicTacToeStatesManager {
     private TicTacToeStateModel ticTacToeStateModel;
-    
+
+    private PlayerEntity player;
+
     public TicTacToeStateModel getTicTacToeStateModel() {
         return this.ticTacToeStateModel;
+    }
+
+    public PlayerEntity getPlayer() {
+        return player;
     }
 
     public TicTacToeStatesManager() {
         this.ticTacToeStateModel = TicTacToeStateModel.INITIAL;
     }
 
-    public void login() {
+    public void login(PlayerEntity player) {
         assert this.ticTacToeStateModel == TicTacToeStateModel.INITIAL
                 || this.ticTacToeStateModel == TicTacToeStateModel.FINAL;
+        this.player = player;
         this.ticTacToeStateModel = TicTacToeStateModel.CLOSED_GAME;
     }
 
@@ -32,6 +40,7 @@ public class TicTacToeStatesManager {
     public void logout() {
         assert this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME
                 || this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME;
+        this.player = null;
         this.ticTacToeStateModel = TicTacToeStateModel.FINAL;
     }
 
