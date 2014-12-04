@@ -9,11 +9,12 @@ import javax.faces.bean.ManagedBean;
 import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.CreateGameController;
-import es.art83.ticTacToe.controllers.LoginController;
+import es.art83.ticTacToe.controllers.LogoutController;
 import es.art83.ticTacToe.controllers.OpenGameController;
 
 @ManagedBean
 public class GameViewBean extends ViewBean {
+
     private List<String> gameNames;
 
     private String gameNameSelected;
@@ -59,8 +60,8 @@ public class GameViewBean extends ViewBean {
     }
 
     public String logout() {
-        this.getSessionMap().put("user", null);
-        LogManager.getLogger(LoginController.class.getName()).info("Sesion cerrada");
+        this.getControllerFactory().getLogoutController().logout();
+        LogManager.getLogger(LogoutController.class.getName()).info("Usuario cerrado");
         return "/login";
     }
 }

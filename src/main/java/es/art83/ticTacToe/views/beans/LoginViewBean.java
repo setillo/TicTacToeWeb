@@ -20,17 +20,16 @@ public class LoginViewBean extends PlayerViewBean {
 
     @PostConstruct
     public void update() {
-        this.finalState = this.getLoginController().ticTacToeState() == TicTacToeStateModel.FINAL;
+        this.finalState = this.getControllerFactory().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
     }
 
     public String process() {
-        boolean ok = this.getLoginController().read(this.getPlayer());
+        boolean ok = this.getControllerFactory().getLoginController().read(this.getPlayer());
         if (!ok) {
             FacesContext.getCurrentInstance().addMessage("loginViewBean",
                     new FacesMessage("usuario o clave incorrecta"));
             return "login";
         } else {
-            this.sessionRegister();
             LogManager.getLogger(LoginController.class.getName()).info(
                     "Usuario Logeado: " + this.getPlayer().toString());
 

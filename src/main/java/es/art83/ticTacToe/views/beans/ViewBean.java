@@ -1,21 +1,20 @@
 package es.art83.ticTacToe.views.beans;
 
-import java.util.Map;
-
 import javax.faces.bean.ManagedProperty;
 
+import es.art83.ticTacToe.controllers.ControllerFactory;
 
 public abstract class ViewBean {
 
-    @ManagedProperty(value = "#{sessionScope}")
-    private Map<String, Object> sessionMap;
+    @ManagedProperty(value = "#{controllerFactory}")
+    private ControllerFactory controllerFactory;
 
-    public void setSessionMap(Map<String, Object> sessionMap) {
-        this.sessionMap = sessionMap;
+    public void setControllerFactory(ControllerFactory controllerFactory) {
+        this.controllerFactory = controllerFactory;
     }
 
-    public Map<String, Object> getSessionMap() {
-        return sessionMap;
+    protected ControllerFactory getControllerFactory() {
+        return controllerFactory;
     }
     
 }

@@ -1,39 +1,36 @@
 package es.art83.ticTacToe.controllers.ejbs;
 
-import javax.faces.bean.ManagedBean;
-
 import es.art83.ticTacToe.controllers.LoginController;
 import es.art83.ticTacToe.models.daos.DAOFactory;
 import es.art83.ticTacToe.models.entities.PlayerEntity;
-import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
-@ManagedBean(name = "loginController")
-public class LoginControllerEJB implements LoginController {
+public class LoginControllerEJB extends ControllerEJB implements LoginController {
+
+    public LoginControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+        super(ticTacToeStatesManager);
+    }
 
     @Override
     public boolean read(PlayerEntity user) {
         PlayerEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
-        if (userBD == null) {
-            return false;
+        if (userBD != null && userBD.getPassword().equals(user.getPassword())) {
+            this.getTicTacToeStatesManager().login();
+            return true;
         } else {
-            return userBD.getPassword().equals(user.getPassword());
+            return false;
         }
     }
 
     @Override
     public boolean create(PlayerEntity user) {
         PlayerEntity userBD = DAOFactory.getFactory().getUserDAO().read(user.getUser());
-        if (userBD != null) {
-            return false;
-        } else {
+        if (userBD == null) {
             DAOFactory.getFactory().getUserDAO().create(user);
+            this.getTicTacToeStatesManager().login();
             return true;
+        } else {
+            return false;
         }
-    }
-
-    @Override
-    public TicTacToeStateModel ticTacToeState() {
-        return TicTacToeStateModel.INITIAL;
     }
 
 }

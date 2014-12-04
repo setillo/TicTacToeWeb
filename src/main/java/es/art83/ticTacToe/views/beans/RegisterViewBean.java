@@ -26,13 +26,12 @@ public class RegisterViewBean extends PlayerViewBean {
                     new FacesMessage("Claves direrentes"));
             return null;
         } else {
-            boolean ok = this.getLoginController().create(this.getPlayer());
+            boolean ok = this.getControllerFactory().getLoginController().create(this.getPlayer());
             if (!ok) {
                 FacesContext.getCurrentInstance().addMessage("registerViewBean:user",
                         new FacesMessage("Usuario ya registrado"));
                 return null;
             } else {
-                this.sessionRegister();
                 LogManager.getLogger(LoginController.class.getName()).info(
                         "Usuario Registrado: " + this.getPlayer().toString());
                 return "logged/game";

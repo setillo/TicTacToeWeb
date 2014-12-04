@@ -1,5 +1,5 @@
 package es.art83.ticTacToe.controllers;
 
-public interface StartGameController {
+public interface StartGameController extends Controller{
 
 }
