@@ -18,6 +18,10 @@ public class GameEntity {
         this.boardEntity = new BoardEntity();
     }
 
+    public GameEntity() {
+        this(null, new PlayerEntity());
+    }
+
     public int getId() {
         return id;
     }

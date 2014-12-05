@@ -1,5 +1,6 @@
 package es.art83.ticTacToe.controllers.ejbs;
 
+import es.art83.ticTacToe.models.entities.GameEntity;
 import es.art83.ticTacToe.models.entities.PlayerEntity;
 import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
@@ -7,41 +8,59 @@ public class TicTacToeStatesManager {
     private TicTacToeStateModel ticTacToeStateModel;
 
     private PlayerEntity player;
+    
+    private GameEntity game;
+    
+    private boolean saved;
 
-    public TicTacToeStateModel getTicTacToeStateModel() {
-        return this.ticTacToeStateModel;
-    }
-
-    public PlayerEntity getPlayer() {
-        return player;
-    }
 
     public TicTacToeStatesManager() {
         this.ticTacToeStateModel = TicTacToeStateModel.INITIAL;
     }
 
-    public void login(PlayerEntity player) {
-        assert this.ticTacToeStateModel == TicTacToeStateModel.INITIAL
-                || this.ticTacToeStateModel == TicTacToeStateModel.FINAL;
-        this.player = player;
-        this.ticTacToeStateModel = TicTacToeStateModel.CLOSED_GAME;
+
+    protected TicTacToeStateModel getTicTacToeStateModel() {
+        return ticTacToeStateModel;
     }
 
-    public void createGame() {
-        assert this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME;
-        this.ticTacToeStateModel = TicTacToeStateModel.OPENED_GAME;
+
+    protected void setTicTacToeStateModel(TicTacToeStateModel ticTacToeStateModel) {
+        this.ticTacToeStateModel = ticTacToeStateModel;
+    }
+
+
+    protected PlayerEntity getPlayer() {
+        return player;
+    }
+
+
+    protected void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
+
+
+    protected GameEntity getGame() {
+        return game;
+    }
+
+
+    protected void setGame(GameEntity game) {
+        this.game = game;
+    }
+
+
+    protected boolean isSaved() {
+        return saved;
+    }
+
+
+    protected void setSaved(boolean saved) {
+        this.saved = saved;
     }
 
     public void openGame() {
         assert this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME;
         this.ticTacToeStateModel = TicTacToeStateModel.OPENED_GAME;
-    }
-
-    public void logout() {
-        assert this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME
-                || this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME;
-        this.player = null;
-        this.ticTacToeStateModel = TicTacToeStateModel.FINAL;
     }
 
     public void placeCard(boolean existTicTacToe) {

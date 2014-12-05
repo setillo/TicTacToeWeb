@@ -24,7 +24,7 @@ public class ControllerFactoryEJB extends ControllerFactory {
 
     private StartGameController startGameController;
     
-    //private CreateGameController createGameController;
+    private CreateGameController createGameController;
 
     //private OpenGameController openGameController;
 
@@ -34,6 +34,7 @@ public class ControllerFactoryEJB extends ControllerFactory {
         this.loginController = new LoginControllerEJB(ticTacToeStatesManager);
         this.logoutController = new LogoutControllerEJB(ticTacToeStatesManager);
         this.startGameController = new StartGameControllerEJB(ticTacToeStatesManager);
+        this.createGameController= new CreateGameControllerEJB(ticTacToeStatesManager);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class ControllerFactoryEJB extends ControllerFactory {
 
     @Override
     public CreateGameController getCreateGameControler() {
-        return null;
+        return createGameController;
     }
 
 

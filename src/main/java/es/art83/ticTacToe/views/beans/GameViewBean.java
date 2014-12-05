@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import es.art83.ticTacToe.controllers.CreateGameController;
 import es.art83.ticTacToe.controllers.LogoutController;
 import es.art83.ticTacToe.controllers.OpenGameController;
+import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 @ManagedBean
 public class GameViewBean extends ViewBean {
@@ -18,9 +19,12 @@ public class GameViewBean extends ViewBean {
 
     private String gameNameSelected;
 
+    private boolean openedGame;
+
     @PostConstruct
     public void update() {
-        this.gameNames=this.getControllerFactory().getStartGameController().readGameNames();
+        this.openedGame = this.getControllerFactory().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
+        this.gameNames = this.getControllerFactory().getStartGameController().readGameNames();
         LogManager.getLogger(OpenGameController.class.getName()).info(
                 "Open game: consultando partidas" + this.gameNames);
     }
@@ -34,11 +38,11 @@ public class GameViewBean extends ViewBean {
     }
 
     public List<String> getGameNames() {
-        return gameNames;
+        return this.gameNames;
     }
 
-    public boolean existTicTacToe() {
-        return true;
+    public boolean isOpenedGame() {
+        return this.openedGame;
     }
 
     public boolean hasGames() {
@@ -46,7 +50,9 @@ public class GameViewBean extends ViewBean {
     }
 
     public String createGame() {
-        LogManager.getLogger(CreateGameController.class.getName()).info("Creando game");
+        this.getControllerFactory().getCreateGameControler().createGame();
+        this.openedGame = true;
+        LogManager.getLogger(CreateGameController.class.getName()).info("Creado game");
         return null;
     }
 
