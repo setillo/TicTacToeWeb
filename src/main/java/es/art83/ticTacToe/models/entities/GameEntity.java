@@ -1,5 +1,9 @@
 package es.art83.ticTacToe.models.entities;
 
+import java.util.List;
+
+import es.art83.ticTacToe.models.utils.ColorModel;
+
 public class GameEntity {
     private int id;
 
@@ -36,6 +40,42 @@ public class GameEntity {
 
     public PlayerEntity getPlayerEntity() {
         return playerEntity;
+    }
+
+    public TurnEntity getTurnEntity() {
+        return turnEntity;
+    }
+
+    public BoardEntity getBoardEntity() {
+        return boardEntity;
+    }
+
+    public boolean isGameOver() {
+        return this.boardEntity.hayTER();
+    }
+
+    public ColorModel[][] completeBoard() {
+        return this.boardEntity.completeBoard();
+    }
+
+    public ColorModel winner() {
+        return this.turnEntity.colorContrario();
+    }
+
+    public ColorModel turnColor() {
+        return this.turnEntity.getColor();
+    }
+
+    public boolean isFullBoard() {
+        return this.boardEntity.tableroCompleto();
+    }
+
+    public List<CoordinateEntity> validSourceCoordinates() {
+        return this.boardEntity.coordenadas(this.turnColor());
+    }
+
+    public List<CoordinateEntity> validDestinationCoordinates() {
+        return this.boardEntity.coordenadasDestinosValidas();
     }
 
 }

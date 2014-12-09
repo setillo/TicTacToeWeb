@@ -1,6 +1,5 @@
 package es.art83.ticTacToe.views.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,11 +25,9 @@ public class GameViewBean extends ViewBean {
 
     private boolean openedGame;
 
-    private boolean gameNamed;
-
     private String nameGame;
 
-    private String[][] fichas;
+    private ColorModel[][] fichas;
 
     private boolean gameOver;
 
@@ -40,10 +37,10 @@ public class GameViewBean extends ViewBean {
 
     private ColorModel turn;
 
-    private boolean sixCardOnBoard;
+    private boolean fullBoard;
 
     private List<CoordinateEntity> validSourceCoordinates;
-    
+
     private String selectedSourceCoordinate;
 
     private List<CoordinateEntity> validDestinationCoordinates;
@@ -53,30 +50,25 @@ public class GameViewBean extends ViewBean {
     @PostConstruct
     public void update() {
         this.openedGame = this.getControllerFactory().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
+        if (this.openedGame) {
+            this.nameGame = this.getControllerFactory().getShowGameController().getNameGame();
+            this.fichas = this.getControllerFactory().getShowGameController().completeBoard();
+            this.gameOver = this.getControllerFactory().getShowGameController().isGameOver();
+            if (this.gameOver) {
+                this.winner = this.getControllerFactory().getShowGameController().winner();
+            } else {
+                this.savedGame = this.getControllerFactory().getShowGameController().isSavedGame();
+                this.turn = this.getControllerFactory().getShowGameController().turnColor();
+                // Se actualiza validSourceCoordinates
+                this.fullBoard = this.getControllerFactory().getShowGameController().isFullBoard();
+                if (this.fullBoard) {
+                    this.validSourceCoordinates = this.getControllerFactory().getShowGameController().validSourceCoordinates();
+                }
+                // Se actualiza validDestinationCoordinates
+                this.validDestinationCoordinates = this.getControllerFactory().getShowGameController().validDestinationCoordinates();
+            }
+        }
         this.gameNames = this.getControllerFactory().getStartGameController().readGameNames();
-        // Se actualiza nameGame
-        this.gameNamed = true;
-        this.nameGame = "Juego...";
-        // Se actualiza fichas
-        this.fichas = new String[][] { {"--", "X", "--"}, {"X", "--", "--"}, {"O", "--", "--"}};
-        LogManager.getLogger(OpenGameController.class.getName()).info(
-                "Open game: consultando partidas" + this.gameNames);
-        // Se actualiza winner
-        this.gameOver = false;
-        this.winner = ColorModel.O;
-        // Se actualiza si la partida esta salvada
-        this.savedGame = false;
-        // se actualiza turno
-        this.turn = ColorModel.O;
-        // Se actualiza validSourceCoordinates
-        this.sixCardOnBoard = true;
-        this.validSourceCoordinates = new ArrayList<>();
-        this.validSourceCoordinates.add(new CoordinateEntity(0, 0));
-        this.validSourceCoordinates.add(new CoordinateEntity(0, 1));
-        // Se actualiza validDestinationCoordinates
-        this.validDestinationCoordinates = new ArrayList<>();
-        this.validDestinationCoordinates.add(new CoordinateEntity(1, 0));
-        this.validDestinationCoordinates.add(new CoordinateEntity(1, 1));
     }
 
     public String getGameNameSelected() {
@@ -100,14 +92,14 @@ public class GameViewBean extends ViewBean {
     }
 
     public boolean isGameNamed() {
-        return gameNamed;
+        return this.nameGame != null;
     }
 
     public String getNameGame() {
         return this.nameGame;
     }
 
-    public String[][] getFichas() {
+    public ColorModel[][] getFichas() {
         return fichas;
     }
 
@@ -127,8 +119,8 @@ public class GameViewBean extends ViewBean {
         return turn;
     }
 
-    public boolean isSixCardOnBoard() {
-        return sixCardOnBoard;
+    public boolean isFullBoard() {
+        return fullBoard;
     }
 
     public List<CoordinateEntity> getValidSourceCoordinates() {
@@ -158,7 +150,7 @@ public class GameViewBean extends ViewBean {
     // Process
     public String createGame() {
         this.getControllerFactory().getCreateGameControler().createGame();
-        this.openedGame = true;
+        this.update();
         LogManager.getLogger(CreateGameController.class.getName()).info("Creado game");
         return null;
     }

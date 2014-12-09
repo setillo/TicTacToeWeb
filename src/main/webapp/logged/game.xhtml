@@ -33,9 +33,9 @@
 					<h:outputText value="Turn: " />
 					<h:outputText value="#{gameViewBean.turn}" />
 					<h:outputText value="Valid source coordinates: "
-						rendered="#{gameViewBean.sixCardOnBoard}" />
+						rendered="#{gameViewBean.fullBoard}" />
 					<h:selectOneMenu value="#{gameViewBean.selectedSourceCoordinate}"
-						rendered="#{gameViewBean.sixCardOnBoard}">
+						rendered="#{gameViewBean.fullBoard}">
 						<f:selectItems value="#{gameViewBean.validSourceCoordinates}" />
 					</h:selectOneMenu>
 					<h:outputText value="Valid destination coordinates: " />

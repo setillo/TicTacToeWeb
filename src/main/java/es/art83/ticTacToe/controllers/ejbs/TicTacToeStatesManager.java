@@ -8,56 +8,50 @@ public class TicTacToeStatesManager {
     private TicTacToeStateModel ticTacToeStateModel;
 
     private PlayerEntity player;
-    
-    private GameEntity game;
-    
-    private boolean saved;
 
+    private GameEntity game;
+
+    private boolean saved;
 
     public TicTacToeStatesManager() {
         this.ticTacToeStateModel = TicTacToeStateModel.INITIAL;
+        this.player = null;
+        this.game = null;
+        this.saved = false;
     }
-
 
     protected TicTacToeStateModel getTicTacToeStateModel() {
         return ticTacToeStateModel;
     }
 
-
     protected void setTicTacToeStateModel(TicTacToeStateModel ticTacToeStateModel) {
         this.ticTacToeStateModel = ticTacToeStateModel;
     }
-
 
     protected PlayerEntity getPlayer() {
         return player;
     }
 
-
     protected void setPlayer(PlayerEntity player) {
         this.player = player;
     }
-
 
     protected GameEntity getGame() {
         return game;
     }
 
-
     protected void setGame(GameEntity game) {
         this.game = game;
     }
 
-
-    protected boolean isSaved() {
+    protected boolean isSavedGame() {
         return saved;
     }
-
 
     protected void setSaved(boolean saved) {
         this.saved = saved;
     }
-
+    
     public void openGame() {
         assert this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME;
         this.ticTacToeStateModel = TicTacToeStateModel.OPENED_GAME;

@@ -15,4 +15,7 @@ public abstract class ControllerFactory {
 
     public abstract StartGameController getStartGameController();
 
+    public abstract NameGameController getNameGameController() ;
+
+    public abstract ShowGameController getShowGameController();
 }

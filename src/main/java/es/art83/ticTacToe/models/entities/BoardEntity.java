@@ -7,7 +7,7 @@ import es.art83.ticTacToe.models.utils.ColorModel;
 import es.art83.ticTacToe.models.utils.DirectionModel;
 
 public class BoardEntity {
-    private int id; 
+    private int id;
 
     private List<PieceEntity> fichas;
 
@@ -94,4 +94,12 @@ public class BoardEntity {
         this.fichas.clear();
     }
 
+    public ColorModel[][] completeBoard() {
+        ColorModel[][] matriz = new ColorModel[3][3];
+        for (PieceEntity ficha : fichas) {
+            matriz[ficha.getCoordenada().getFila()][ficha.getCoordenada().getColumna()] = ficha
+                    .getColor();
+        }
+        return matriz;
+    }
 }
