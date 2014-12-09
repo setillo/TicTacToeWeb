@@ -175,15 +175,16 @@ public class GameViewBean extends ViewBean {
         return null;
     }
 
+    public String saveGame() {
+        LogManager.getLogger(SaveGameController.class.getName()).info("Save game");
+        return null;
+    }
+    
     public String openGame() {
         LogManager.getLogger(OpenGameController.class.getName()).info(
                 "Open game: " + this.gameNameSelected);
         return null;
     }
 
-    public String saveGame() {
-        LogManager.getLogger(SaveGameController.class.getName()).info("Save game");
-        return null;
-    }
 
 }

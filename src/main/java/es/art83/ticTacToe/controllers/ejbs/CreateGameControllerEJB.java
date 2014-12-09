@@ -17,7 +17,6 @@ public class CreateGameControllerEJB extends ControllerEJB implements CreateGame
         assert this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME;
         this.getTicTacToeStatesManager().setGame(new GameEntity());
         this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.OPENED_GAME);
-        LogManager.getLogger(CreateGameControllerEJB.class.getName()).info("Partida creada");
     }
 
 }
