@@ -24,31 +24,31 @@
 				<h:column>#{fila[2]}</h:column>
 			</h:dataTable>
 			<h:panelGroup rendered="#{!gameViewBean.gameOver}">
-				<h:panelGrid columns="2">
-					<h:outputText value="" rendered="#{!gameViewBean.savedGame}" />
-					<h:form id="saveGameViewBean" rendered="#{!gameViewBean.savedGame}">
-						<h:commandButton value="Save game"
-							action="#{gameViewBean.saveGame}" />
-					</h:form>
-					<h:outputText value="Turn: " />
-					<h:outputText value="#{gameViewBean.turn}" />
-					<h:outputText value="Valid source coordinates: "
-						rendered="#{gameViewBean.fullBoard}" />
-					<h:selectOneMenu value="#{gameViewBean.selectedSourceCoordinate}"
-						rendered="#{gameViewBean.fullBoard}">
-						<f:selectItems value="#{gameViewBean.validSourceCoordinates}" />
-					</h:selectOneMenu>
-					<h:outputText value="Valid destination coordinates: " />
-					<h:selectOneMenu
-						value="#{gameViewBean.selectedDestinationCoordinate}">
-						<f:selectItems value="#{gameViewBean.validDestinationCoordinates}" />
-					</h:selectOneMenu>
-					<h:outputText value="" />
-					<h:form id="placeCardGameViewBean">
+				<h:form id="saveGameViewBean" rendered="#{!gameViewBean.savedGame}">
+					<h:commandButton value="Save game"
+						action="#{gameViewBean.saveGame}" />
+				</h:form>
+				<h:form id="placeCardGameViewBean">
+					<h:panelGrid columns="2">
+						<h:outputText value="Turn: " />
+						<h:outputText value="#{gameViewBean.turn}" />
+						<h:outputText value="Valid source coordinates: "
+							rendered="#{gameViewBean.fullBoard}" />
+						<h:selectOneMenu value="#{gameViewBean.selectedSourceCoordinate}"
+							rendered="#{gameViewBean.fullBoard}">
+							<f:selectItems value="#{gameViewBean.validSourceCoordinates}" />
+						</h:selectOneMenu>
+						<h:outputText value="Valid destination coordinates: " />
+						<h:selectOneMenu
+							value="#{gameViewBean.selectedDestinationCoordinate}">
+							<f:selectItems
+								value="#{gameViewBean.validDestinationCoordinates}" />
+						</h:selectOneMenu>
+						<h:outputText value="" />
 						<h:commandButton value="Place card"
 							action="#{gameViewBean.placeCard}" />
-					</h:form>
-				</h:panelGrid>
+					</h:panelGrid>
+				</h:form>
 			</h:panelGroup>
 
 			<h:panelGroup rendered="#{gameViewBean.gameOver}">

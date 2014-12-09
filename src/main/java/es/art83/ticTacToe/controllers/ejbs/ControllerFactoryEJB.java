@@ -9,6 +9,7 @@ import es.art83.ticTacToe.controllers.LoginController;
 import es.art83.ticTacToe.controllers.LogoutController;
 import es.art83.ticTacToe.controllers.NameGameController;
 import es.art83.ticTacToe.controllers.OpenGameController;
+import es.art83.ticTacToe.controllers.PlaceCardController;
 import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.controllers.StartGameController;
 import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
@@ -33,6 +34,8 @@ public class ControllerFactoryEJB extends ControllerFactory {
     
     private ShowGameController showGameController;
 
+    private PlaceCardController placeCardController;
+
     public ControllerFactoryEJB() {
         this.ticTacToeStatesManager = new TicTacToeStatesManager();
         this.loginController = new LoginControllerEJB(ticTacToeStatesManager);
@@ -41,6 +44,8 @@ public class ControllerFactoryEJB extends ControllerFactory {
         this.createGameController = new CreateGameControllerEJB(ticTacToeStatesManager);
         this.nameGameController = new NameGameControllerEJB(ticTacToeStatesManager);
         this.showGameController = new ShowGameControllerEJB(ticTacToeStatesManager);
+        this.placeCardController = new PlaceCardControllerEJB(ticTacToeStatesManager);
+        
     }
 
     @Override
@@ -81,6 +86,11 @@ public class ControllerFactoryEJB extends ControllerFactory {
     @Override
     public ShowGameController getShowGameController() {
         return this.showGameController;
+    }
+
+    @Override
+    public PlaceCardController getPlaceCardController() {
+        return this.placeCardController;
     }
 
 }

@@ -59,13 +59,13 @@ public class GameViewBean extends ViewBean {
             } else {
                 this.savedGame = this.getControllerFactory().getShowGameController().isSavedGame();
                 this.turn = this.getControllerFactory().getShowGameController().turnColor();
-                // Se actualiza validSourceCoordinates
                 this.fullBoard = this.getControllerFactory().getShowGameController().isFullBoard();
                 if (this.fullBoard) {
-                    this.validSourceCoordinates = this.getControllerFactory().getShowGameController().validSourceCoordinates();
+                    this.validSourceCoordinates = this.getControllerFactory()
+                            .getShowGameController().validSourceCoordinates();
                 }
-                // Se actualiza validDestinationCoordinates
-                this.validDestinationCoordinates = this.getControllerFactory().getShowGameController().validDestinationCoordinates();
+                this.validDestinationCoordinates = this.getControllerFactory()
+                        .getShowGameController().validDestinationCoordinates();
             }
         }
         this.gameNames = this.getControllerFactory().getStartGameController().readGameNames();
@@ -140,18 +140,38 @@ public class GameViewBean extends ViewBean {
     }
 
     public String getSelectedDestinationCoordinate() {
-        return selectedDestinationCoordinate;
+        return this.selectedDestinationCoordinate;
     }
 
     public void setSelectedDestinationCoordinate(String selectedDestinationCoordinate) {
         this.selectedDestinationCoordinate = selectedDestinationCoordinate;
     }
 
-    // Process
+    // P R O C E S S
+    // -----------------------------------------------------------------------
     public String createGame() {
         this.getControllerFactory().getCreateGameControler().createGame();
         this.update();
         LogManager.getLogger(CreateGameController.class.getName()).info("Creado game");
+        return null;
+    }
+
+    public String logout() {
+        this.getControllerFactory().getLogoutController().logout();
+        LogManager.getLogger(LogoutController.class.getName()).info("Usuario cerrado");
+        return "/login";
+    }
+
+    public String placeCard() {
+        if (this.fullBoard) {
+            this.getControllerFactory().getPlaceCardController()
+            .placeCard(new CoordinateEntity(this.selectedSourceCoordinate),new CoordinateEntity(this.selectedDestinationCoordinate));
+        } else {
+            this.getControllerFactory().getPlaceCardController()
+                    .placeCard(new CoordinateEntity(this.selectedDestinationCoordinate));
+        }
+        LogManager.getLogger(PlaceCardController.class.getName()).info("Place card");
+        this.update();
         return null;
     }
 
@@ -166,14 +186,4 @@ public class GameViewBean extends ViewBean {
         return null;
     }
 
-    public String placeCard() {
-        LogManager.getLogger(PlaceCardController.class.getName()).info("Place card");
-        return null;
-    }
-
-    public String logout() {
-        this.getControllerFactory().getLogoutController().logout();
-        LogManager.getLogger(LogoutController.class.getName()).info("Usuario cerrado");
-        return "/login";
-    }
 }

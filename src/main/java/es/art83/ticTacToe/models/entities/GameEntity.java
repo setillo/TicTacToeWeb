@@ -78,4 +78,14 @@ public class GameEntity {
         return this.boardEntity.coordenadasDestinosValidas();
     }
 
+    public void placeCard(CoordinateEntity coordinateEntity) {
+        this.boardEntity.poner(new PieceEntity(this.getTurnEntity().getColor(), coordinateEntity));
+        this.turnEntity.cambiar();
+    }
+
+    public void placeCard(CoordinateEntity source, CoordinateEntity destination) {
+        this.boardEntity.quitar(source);
+        this.placeCard(destination);
+    }
+
 }
