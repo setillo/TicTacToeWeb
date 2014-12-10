@@ -2,7 +2,7 @@ package es.art83.ticTacToe.controllers;
 
 import es.art83.ticTacToe.models.entities.PlayerEntity;
 
-public interface LoginController extends Controller{
+public interface LoginController {
 
     boolean login(PlayerEntity user);
 

@@ -19,7 +19,7 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 @SessionScoped
 public class ControllerFactoryEJB extends ControllerFactory {
 
-    private TicTacToeApplicationManager ticTacToeStatesManager;
+    private TicTacToeApplicationManager ticTacToeApplicationManager;
 
     private LoginController loginController;
 
@@ -40,21 +40,21 @@ public class ControllerFactoryEJB extends ControllerFactory {
     private SaveGameController saveGameController;
 
     public ControllerFactoryEJB() {
-        this.ticTacToeStatesManager = new TicTacToeApplicationManager();
-        this.loginController = new LoginControllerEJB(ticTacToeStatesManager);
-        this.logoutController = new LogoutControllerEJB(ticTacToeStatesManager);
-        this.startGameController = new StartGameControllerEJB(ticTacToeStatesManager);
-        this.createGameController = new CreateGameControllerEJB(ticTacToeStatesManager);
-        this.nameGameController = new NameGameControllerEJB(ticTacToeStatesManager);
-        this.showGameController = new ShowGameControllerEJB(ticTacToeStatesManager);
-        this.placeCardController = new PlaceCardControllerEJB(ticTacToeStatesManager);
-        this.saveGameController = new SaveGameControllerEJB(ticTacToeStatesManager);
-        this.openGameController = new OpenGameControllerEJB(ticTacToeStatesManager);
+        this.ticTacToeApplicationManager = new TicTacToeApplicationManager();
+        this.loginController = new LoginControllerEJB(ticTacToeApplicationManager);
+        this.logoutController = new LogoutControllerEJB(ticTacToeApplicationManager);
+        this.startGameController = new StartGameControllerEJB(ticTacToeApplicationManager);
+        this.createGameController = new CreateGameControllerEJB(ticTacToeApplicationManager);
+        this.nameGameController = new NameGameControllerEJB(ticTacToeApplicationManager);
+        this.showGameController = new ShowGameControllerEJB(ticTacToeApplicationManager);
+        this.placeCardController = new PlaceCardControllerEJB(ticTacToeApplicationManager);
+        this.saveGameController = new SaveGameControllerEJB(ticTacToeApplicationManager);
+        this.openGameController = new OpenGameControllerEJB(ticTacToeApplicationManager);
     }
 
     @Override
-    public TicTacToeStateModel getTicTacToeStateModel() {
-        return this.ticTacToeStatesManager.getTicTacToeStateModel();
+    public TicTacToeStateModel getTicTacToeApplicationModel() {
+        return this.ticTacToeApplicationManager.getTicTacToeStateModel();
     }
 
     @Override

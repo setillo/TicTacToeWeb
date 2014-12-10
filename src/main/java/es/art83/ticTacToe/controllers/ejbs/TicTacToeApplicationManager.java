@@ -21,7 +21,7 @@ public class TicTacToeApplicationManager {
     }
 
     protected TicTacToeStateModel getTicTacToeStateModel() {
-        return ticTacToeStateModel;
+        return this.ticTacToeStateModel;
     }
 
     protected void setTicTacToeStateModel(TicTacToeStateModel ticTacToeStateModel) {
@@ -29,7 +29,7 @@ public class TicTacToeApplicationManager {
     }
 
     protected PlayerEntity getPlayer() {
-        return player;
+        return this.player;
     }
 
     protected void setPlayer(PlayerEntity player) {
@@ -37,7 +37,7 @@ public class TicTacToeApplicationManager {
     }
 
     protected GameEntity getGame() {
-        return game;
+        return this.game;
     }
 
     protected void setGame(GameEntity game) {
@@ -45,23 +45,11 @@ public class TicTacToeApplicationManager {
     }
 
     protected boolean isSavedGame() {
-        return saved;
+        return this.saved;
     }
 
     protected void setSaved(boolean saved) {
         this.saved = saved;
     }
     
-    public void openGame() {
-        assert this.ticTacToeStateModel == TicTacToeStateModel.CLOSED_GAME;
-        this.ticTacToeStateModel = TicTacToeStateModel.OPENED_GAME;
-    }
-
-    public void placeCard(boolean existTicTacToe) {
-        assert this.ticTacToeStateModel == TicTacToeStateModel.OPENED_GAME;
-        if (existTicTacToe) {
-            this.ticTacToeStateModel = TicTacToeStateModel.CLOSED_GAME;
-        }
-    }
-
 }

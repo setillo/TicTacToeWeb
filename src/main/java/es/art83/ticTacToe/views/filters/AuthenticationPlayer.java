@@ -22,7 +22,7 @@ public class AuthenticationPlayer implements Filter {
             throws IOException, ServletException {
         ControllerFactory controllerFactory = (ControllerFactory) ((HttpServletRequest) request)
                 .getSession().getAttribute("controllerFactory");
-        TicTacToeStateModel ticTacToeStateModel = controllerFactory.getTicTacToeStateModel();
+        TicTacToeStateModel ticTacToeStateModel = controllerFactory.getTicTacToeApplicationModel();
         if (ticTacToeStateModel == TicTacToeStateModel.INITIAL
                 || ticTacToeStateModel == TicTacToeStateModel.FINAL) {
             ((HttpServletResponse) response).sendRedirect("../login.xhtml");

@@ -1,6 +1,6 @@
 package es.art83.ticTacToe.controllers;
 
-public interface LogoutController extends Controller{
+public interface LogoutController {
 
     void logout();
 

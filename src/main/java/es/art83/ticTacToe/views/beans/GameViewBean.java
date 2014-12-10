@@ -48,7 +48,7 @@ public class GameViewBean extends ViewBean {
 
     @PostConstruct
     public void update() {
-        this.openedGame = this.getControllerFactory().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
+        this.openedGame = this.getControllerFactory().getTicTacToeApplicationModel() == TicTacToeStateModel.OPENED_GAME;
         if (this.openedGame) {
             this.nameGame = this.getControllerFactory().getShowGameController().getNameGame();
             this.fichas = this.getControllerFactory().getShowGameController().completeBoard();
