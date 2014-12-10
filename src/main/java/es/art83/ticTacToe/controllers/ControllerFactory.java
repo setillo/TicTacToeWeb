@@ -6,18 +6,20 @@ public abstract class ControllerFactory {
     public abstract TicTacToeStateModel getTicTacToeStateModel();
 
     public abstract LoginController getLoginController();
-    
+
     public abstract LogoutController getLogoutController();
-    
+
     public abstract CreateGameController getCreateGameControler();
 
     public abstract OpenGameController getOpenGameController();
 
     public abstract StartGameController getStartGameController();
 
-    public abstract NameGameController getNameGameController() ;
+    public abstract NameGameController getNameGameController();
 
     public abstract ShowGameController getShowGameController();
 
     public abstract PlaceCardController getPlaceCardController();
+
+    public abstract SaveGameController getSaveGameController();
 }

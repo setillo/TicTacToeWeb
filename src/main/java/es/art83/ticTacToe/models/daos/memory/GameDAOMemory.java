@@ -15,6 +15,17 @@ public class GameDAOMemory extends GenericDAOMemory<GameEntity, Integer> impleme
     }
 
     @Override
+    protected GameEntity clone(GameEntity entity) {
+        GameEntity game = new GameEntity(entity.getName(), entity.getPlayerEntity());
+        game.setId(IdGenerator.getInstance().generate(GameEntity.class.getName()));
+        game.setBoardEntity(((BoardDAOMemory) DAOMemoryFactory.getFactory().getBoardDAO())
+                .clone(entity.getBoardEntity()));
+        game.setTurnEntity(((TurnDAOMemory) DAOMemoryFactory.getFactory().getTurnDAO())
+                .clone(entity.getTurnEntity()));
+        return game;
+    }
+
+    @Override
     public List<String> findPlayerNamesGames(PlayerEntity playerEntity) {
         List<String> namesGames = new ArrayList<>();
         List<GameEntity> games = this.findAll();

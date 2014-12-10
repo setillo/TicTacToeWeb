@@ -24,13 +24,14 @@ public class LoginViewBean extends PlayerViewBean {
     }
 
     public String process() {
-        boolean ok = this.getControllerFactory().getLoginController().read(this.getPlayer());
+        LoginController loginController = this.getControllerFactory().getLoginController();
+        boolean ok = loginController.read(this.getPlayer());
         if (!ok) {
             FacesContext.getCurrentInstance().addMessage("loginViewBean",
                     new FacesMessage("usuario o clave incorrecta"));
             return "login";
         } else {
-            LogManager.getLogger(LoginController.class.getName()).info(
+            LogManager.getLogger(loginController.getClass().getName()).info(
                     "Usuario Logeado: " + this.getPlayer().toString());
 
             return "logged/game";

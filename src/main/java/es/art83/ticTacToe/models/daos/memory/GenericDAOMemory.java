@@ -7,16 +7,17 @@ import java.util.Map;
 
 import es.art83.ticTacToe.models.daos.GenericDAO;
 
-
-
 public abstract class GenericDAOMemory<T, ID> implements GenericDAO<T, ID> {
     private Map<ID, T> bd = new HashMap<ID, T>();
 
     protected abstract ID getId(T entity);
 
+    protected abstract T clone(T entity);
+
     @Override
     public void create(T entity) {
-        this.bd.put(this.getId(entity), entity);
+        T entityClone = this.clone(entity);
+        this.bd.put(this.getId(entityClone), entityClone);
     }
 
     @Override
@@ -26,8 +27,7 @@ public abstract class GenericDAOMemory<T, ID> implements GenericDAO<T, ID> {
 
     @Override
     public void update(T entity) {
-        if (this.bd.containsValue(entity))
-            this.bd.put(this.getId(entity), entity);
+        throw new UnsupportedOperationException("update no soportado con memoria");
     }
 
     @Override

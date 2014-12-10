@@ -9,9 +9,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.CreateGameController;
 import es.art83.ticTacToe.controllers.LogoutController;
-import es.art83.ticTacToe.controllers.OpenGameController;
 import es.art83.ticTacToe.controllers.PlaceCardController;
-import es.art83.ticTacToe.controllers.SaveGameController;
 import es.art83.ticTacToe.models.entities.CoordinateEntity;
 import es.art83.ticTacToe.models.utils.ColorModel;
 import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
@@ -150,41 +148,41 @@ public class GameViewBean extends ViewBean {
     // P R O C E S S
     // -----------------------------------------------------------------------
     public String createGame() {
-        this.getControllerFactory().getCreateGameControler().createGame();
+        CreateGameController createGameController = this.getControllerFactory()
+                .getCreateGameControler();
+        createGameController.createGame();
         this.update();
-        LogManager.getLogger(CreateGameController.class.getName()).info("Creado game");
+        LogManager.getLogger(createGameController.getClass().getName()).info("Creado game");
         return null;
     }
 
     public String logout() {
-        this.getControllerFactory().getLogoutController().logout();
-        LogManager.getLogger(LogoutController.class.getName()).info("Usuario cerrado");
+        LogoutController logoutController = this.getControllerFactory().getLogoutController();
+        logoutController.logout();
+        LogManager.getLogger(logoutController.getClass().getName()).info("Usuario cerrado");
         return "/login";
     }
 
     public String placeCard() {
+        PlaceCardController placeCardController = this.getControllerFactory()
+                .getPlaceCardController();
         if (this.fullBoard) {
-            this.getControllerFactory().getPlaceCardController()
-            .placeCard(new CoordinateEntity(this.selectedSourceCoordinate),new CoordinateEntity(this.selectedDestinationCoordinate));
+            placeCardController.placeCard(new CoordinateEntity(this.selectedSourceCoordinate),
+                    new CoordinateEntity(this.selectedDestinationCoordinate));
         } else {
-            this.getControllerFactory().getPlaceCardController()
-                    .placeCard(new CoordinateEntity(this.selectedDestinationCoordinate));
+            placeCardController.placeCard(new CoordinateEntity(this.selectedDestinationCoordinate));
         }
-        LogManager.getLogger(PlaceCardController.class.getName()).info("Place card");
+        LogManager.getLogger(placeCardController.getClass().getName()).info("Place card");
         this.update();
         return null;
     }
 
     public String saveGame() {
-        LogManager.getLogger(SaveGameController.class.getName()).info("Save game");
-        return null;
-    }
-    
-    public String openGame() {
-        LogManager.getLogger(OpenGameController.class.getName()).info(
-                "Open game: " + this.gameNameSelected);
-        return null;
+        return "save";
     }
 
+    public String openGame() {
+        return null;
+    }
 
 }

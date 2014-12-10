@@ -14,6 +14,8 @@ public class PlaceCardControllerEJB extends ControllerEJB implements PlaceCardCo
         assert this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
         if (this.getTicTacToeStatesManager().getGame().isGameOver()){
             this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.CLOSED_GAME);
+        }else{
+            this.getTicTacToeStatesManager().setSaved(false);
         }
     }
 

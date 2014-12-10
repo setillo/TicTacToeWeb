@@ -22,8 +22,8 @@ public class GameEntity {
         this.boardEntity = new BoardEntity();
     }
 
-    public GameEntity() {
-        this(null, new PlayerEntity());
+    public GameEntity(PlayerEntity playerEntity) {
+        this(null, playerEntity);
     }
 
     public int getId() {
@@ -38,16 +38,32 @@ public class GameEntity {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public PlayerEntity getPlayerEntity() {
         return playerEntity;
+    }
+
+    public void setPlayerEntity(PlayerEntity playerEntity) {
+        this.playerEntity = playerEntity;
     }
 
     public TurnEntity getTurnEntity() {
         return turnEntity;
     }
 
+    public void setTurnEntity(TurnEntity turnEntity) {
+        this.turnEntity = turnEntity;
+    }
+
     public BoardEntity getBoardEntity() {
         return boardEntity;
+    }
+
+    public void setBoardEntity(BoardEntity boardEntity) {
+        this.boardEntity = boardEntity;
     }
 
     public boolean isGameOver() {
@@ -86,6 +102,12 @@ public class GameEntity {
     public void placeCard(CoordinateEntity source, CoordinateEntity destination) {
         this.boardEntity.quitar(source);
         this.placeCard(destination);
+    }
+
+    @Override
+    public String toString() {
+        return "GameEntity [id=" + id + ", name=" + name + ", playerEntity=" + playerEntity
+                + ", turnEntity=" + turnEntity + ", boardEntity=" + boardEntity + "]";
     }
 
 }

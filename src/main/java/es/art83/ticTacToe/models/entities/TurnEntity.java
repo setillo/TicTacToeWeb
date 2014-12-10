@@ -2,31 +2,29 @@ package es.art83.ticTacToe.models.entities;
 
 import es.art83.ticTacToe.models.utils.ColorModel;
 
-
 public class TurnEntity {
     private int id;
 
     private ColorModel color;
 
-    public TurnEntity(int id, ColorModel color) {
-        this.id = id;
-        this.color = color;
-    }
-
-    public TurnEntity(int id) {
-        this(id, ColorModel.X);
-    }
-
     public TurnEntity() {
-        this(-1);
+        this.color = ColorModel.X;
     }
 
     public int getId() {
         return this.id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public ColorModel getColor() {
         return color;
+    }
+
+    public void setColor(ColorModel color) {
+        this.color = color;
     }
 
     public ColorModel colorContrario() {
@@ -43,6 +41,11 @@ public class TurnEntity {
         } else {
             this.color = ColorModel.X;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "TurnEntity[" + id + "," + color + "]";
     }
 
 }

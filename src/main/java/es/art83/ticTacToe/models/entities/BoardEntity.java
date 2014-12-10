@@ -27,6 +27,10 @@ public class BoardEntity {
         return this.fichas;
     }
 
+    public void setFichas(List<PieceEntity> fichas) {
+        this.fichas = fichas;
+    }
+
     public List<CoordinateEntity> coordenadasDestinosValidas() {
         List<CoordinateEntity> vacias = CoordinateEntity.posibles();
         for (PieceEntity ficha : fichas) {
@@ -102,4 +106,10 @@ public class BoardEntity {
         }
         return matriz;
     }
+
+    @Override
+    public String toString() {
+        return "BoardEntity [" + id + ":" + fichas + "]";
+    }
+    
 }

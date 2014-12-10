@@ -19,5 +19,9 @@ public abstract class DAOFactory {
     public abstract PlayerDAO getPlayerDAO();
     
     public abstract GameDAO getGameDAO();
+    
+    public abstract BoardDAO getBoardDAO();
+    
+    public abstract TurnDAO getTurnDAO();
 
 }
