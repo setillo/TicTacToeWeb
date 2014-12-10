@@ -23,4 +23,15 @@ public class SaveGameControllerEJB extends ControllerEJB implements SaveGameCont
         this.getTicTacToeStatesManager().setSaved(true);
     }
 
+    @Override
+    public String getGameName() {
+        return  this.getTicTacToeStatesManager().getGame().getName();
+    }
+
+    @Override
+    public void overWriteGame() {
+        DAOFactory.getFactory().getGameDAO().update(this.getTicTacToeStatesManager().getGame());
+        this.getTicTacToeStatesManager().setSaved(true);
+    }
+
 }

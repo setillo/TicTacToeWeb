@@ -20,6 +20,7 @@ public class SaveViewBean extends ViewBean {
     @PostConstruct
     public void update() {
         this.gameNames = this.getControllerFactory().getSaveGameController().gameNames();
+        this.gameName = this.getControllerFactory().getSaveGameController().getGameName();
     }
 
     public List<String> getGameNames() {
@@ -38,13 +39,14 @@ public class SaveViewBean extends ViewBean {
         return this.gameNames.size() == 0;
     }
 
-    public String process() {
-        SaveGameController saveGameController = this.getControllerFactory().getSaveGameController();
+    public String saveGame() {
         String next = null;
         if (this.gameNames.contains(this.gameName)) {
             FacesContext.getCurrentInstance().addMessage("saveViewBean:gameName",
                     new FacesMessage("Game name exist!!!"));
         } else {
+            SaveGameController saveGameController = this.getControllerFactory()
+                    .getSaveGameController();
             saveGameController.saveGame(this.gameName);
             LogManager.getLogger(saveGameController.getClass().getName()).info(
                     "Partida salvada: " + this.gameName);
@@ -52,4 +54,13 @@ public class SaveViewBean extends ViewBean {
         }
         return next;
     }
+
+    public String overWriteGame() {
+        SaveGameController saveGameController = this.getControllerFactory().getSaveGameController();
+        saveGameController.overWriteGame();
+        LogManager.getLogger(saveGameController.getClass().getName()).info(
+                "Partida sobrescrita: " + this.gameName);
+        return "game";
+    }
+
 }

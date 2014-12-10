@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.art83.ticTacToe.models.daos.GameDAO;
+import es.art83.ticTacToe.models.entities.BoardEntity;
 import es.art83.ticTacToe.models.entities.GameEntity;
 import es.art83.ticTacToe.models.entities.PlayerEntity;
+import es.art83.ticTacToe.models.entities.TurnEntity;
 
 public class GameDAOMemory extends GenericDAOMemory<GameEntity, Integer> implements GameDAO {
 
@@ -15,14 +17,33 @@ public class GameDAOMemory extends GenericDAOMemory<GameEntity, Integer> impleme
     }
 
     @Override
-    protected GameEntity clone(GameEntity entity) {
+    public void create(GameEntity entity) {
         GameEntity game = new GameEntity(entity.getName(), entity.getPlayerEntity());
         game.setId(IdGenerator.getInstance().generate(GameEntity.class.getName()));
-        game.setBoardEntity(((BoardDAOMemory) DAOMemoryFactory.getFactory().getBoardDAO())
-                .clone(entity.getBoardEntity()));
-        game.setTurnEntity(((TurnDAOMemory) DAOMemoryFactory.getFactory().getTurnDAO())
-                .clone(entity.getTurnEntity()));
-        return game;
+        entity.setId(game.getId());
+
+        BoardEntity board = new BoardEntity();
+        board.setId(IdGenerator.getInstance().generate(BoardEntity.class.getName()));
+        entity.getBoardEntity().setId(board.getId());
+        board.setFichas(entity.getBoardEntity().getFichas());
+
+        TurnEntity turn = new TurnEntity();
+        turn.setId(IdGenerator.getInstance().generate(TurnEntity.class.getName()));
+        entity.getTurnEntity().setId(turn.getId());
+        turn.setColor(entity.getTurnEntity().getColor());
+
+        this.getBd().put(game.getId(), game);
+    }
+
+    @Override
+    public void update(GameEntity entity) {
+        GameEntity game = this.read(entity.getId());
+        assert game != null;
+        BoardEntity board = game.getBoardEntity();
+        board.setFichas(entity.getBoardEntity().getFichas());
+
+        TurnEntity turn = game.getTurnEntity();
+        turn.setColor(entity.getTurnEntity().getColor());
     }
 
     @Override

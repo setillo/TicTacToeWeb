@@ -12,22 +12,13 @@ public abstract class GenericDAOMemory<T, ID> implements GenericDAO<T, ID> {
 
     protected abstract ID getId(T entity);
 
-    protected abstract T clone(T entity);
-
-    @Override
-    public void create(T entity) {
-        T entityClone = this.clone(entity);
-        this.bd.put(this.getId(entityClone), entityClone);
+    protected Map<ID, T> getBd() {
+        return bd;
     }
 
     @Override
     public T read(ID id) {
         return this.bd.get(id);
-    }
-
-    @Override
-    public void update(T entity) {
-        throw new UnsupportedOperationException("update no soportado con memoria");
     }
 
     @Override

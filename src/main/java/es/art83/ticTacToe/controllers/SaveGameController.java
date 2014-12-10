@@ -8,4 +8,8 @@ public interface SaveGameController {
 
     void saveGame(String gameName);
 
+    String getGameName();
+
+    void overWriteGame();
+
 }
