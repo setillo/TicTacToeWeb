@@ -157,10 +157,16 @@ public class GameViewBean extends ViewBean {
     }
 
     public String logout() {
+        String next = null;
         LogoutController logoutController = this.getControllerFactory().getLogoutController();
-        logoutController.logout();
-        LogManager.getLogger(logoutController.getClass().getName()).info("Usuario cerrado");
-        return "/login";
+        if (!logoutController.savedGame()) {
+            next = "logout";
+        } else {
+            logoutController.logout();
+            LogManager.getLogger(logoutController.getClass().getName()).info("Usuario cerrado");
+            next = "/login";
+        }
+        return next;
     }
 
     public String placeCard() {

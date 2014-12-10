@@ -6,4 +6,6 @@ public interface LogoutController {
 
     boolean isBye();
 
+    boolean savedGame();
+
 }

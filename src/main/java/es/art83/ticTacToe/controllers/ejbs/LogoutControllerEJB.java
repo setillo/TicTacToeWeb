@@ -29,4 +29,9 @@ public class LogoutControllerEJB extends ControllerEJB implements LogoutControll
         return this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
     }
 
+    @Override
+    public boolean savedGame() {
+        return this.getTicTacToeStatesManager().isSavedGame();
+    }
+
 }
