@@ -32,7 +32,7 @@ public class PlayerEntity {
 
     @Override
     public String toString() {
-        return "User[" + user + "," + password + "]";
+        return "User[" + user + ":" + password + "]";
     }
 
     @Override

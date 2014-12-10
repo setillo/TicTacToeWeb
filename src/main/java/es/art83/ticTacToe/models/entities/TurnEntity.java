@@ -45,7 +45,7 @@ public class TurnEntity {
 
     @Override
     public String toString() {
-        return "TurnEntity[" + id + "," + color + "]";
+        return "TurnEntity[" + id + ":" + color + "]";
     }
 
 }

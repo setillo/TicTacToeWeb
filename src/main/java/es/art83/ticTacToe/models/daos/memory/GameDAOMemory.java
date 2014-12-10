@@ -26,11 +26,13 @@ public class GameDAOMemory extends GenericDAOMemory<GameEntity, Integer> impleme
         board.setId(IdGenerator.getInstance().generate(BoardEntity.class.getName()));
         entity.getBoardEntity().setId(board.getId());
         board.setFichas(entity.getBoardEntity().getFichas());
+        game.setBoardEntity(board);
 
         TurnEntity turn = new TurnEntity();
         turn.setId(IdGenerator.getInstance().generate(TurnEntity.class.getName()));
         entity.getTurnEntity().setId(turn.getId());
         turn.setColor(entity.getTurnEntity().getColor());
+        game.setTurnEntity(turn);
 
         this.getBd().put(game.getId(), game);
     }
@@ -57,4 +59,16 @@ public class GameDAOMemory extends GenericDAOMemory<GameEntity, Integer> impleme
         return namesGames;
     }
 
+    @Override
+    public GameEntity findGame(PlayerEntity player, String nameGame) {
+        GameEntity gameBD = null;
+        List<GameEntity> games = this.findAll();
+        for (GameEntity game : games) {
+            if (game.getPlayerEntity().equals(player) && game.getName().equals(nameGame)) {
+                gameBD = game;
+                break;
+            }
+        }
+        return gameBD;
+    }
 }

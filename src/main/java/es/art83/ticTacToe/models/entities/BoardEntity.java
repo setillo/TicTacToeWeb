@@ -109,7 +109,7 @@ public class BoardEntity {
 
     @Override
     public String toString() {
-        return "BoardEntity [" + id + ":" + fichas + "]";
+        return "BoardEntity[" + id + ":" + fichas + "]";
     }
     
 }

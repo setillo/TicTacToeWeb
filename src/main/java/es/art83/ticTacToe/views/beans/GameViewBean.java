@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.CreateGameController;
 import es.art83.ticTacToe.controllers.LogoutController;
+import es.art83.ticTacToe.controllers.OpenGameController;
 import es.art83.ticTacToe.controllers.PlaceCardController;
 import es.art83.ticTacToe.models.entities.CoordinateEntity;
 import es.art83.ticTacToe.models.utils.ColorModel;
@@ -145,8 +146,7 @@ public class GameViewBean extends ViewBean {
         this.selectedDestinationCoordinate = selectedDestinationCoordinate;
     }
 
-    // P R O C E S S
-    // -----------------------------------------------------------------------
+    // P R O C E S S -------- ---------- ---------- ---------- ----------
     public String createGame() {
         CreateGameController createGameController = this.getControllerFactory()
                 .getCreateGameControler();
@@ -182,6 +182,10 @@ public class GameViewBean extends ViewBean {
     }
 
     public String openGame() {
+        OpenGameController openGameController = this.getControllerFactory().getOpenGameController();
+        openGameController.openGame(this.gameNameSelected);
+        this.update();
+        LogManager.getLogger(openGameController.getClass().getName()).info("openGame");
         return null;
     }
 

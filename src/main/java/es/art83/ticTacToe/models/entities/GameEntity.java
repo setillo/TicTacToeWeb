@@ -106,8 +106,8 @@ public class GameEntity {
 
     @Override
     public String toString() {
-        return "GameEntity [id=" + id + ", name=" + name + ", playerEntity=" + playerEntity
-                + ", turnEntity=" + turnEntity + ", boardEntity=" + boardEntity + "]";
+        return "GameEntity[" + id + ":" + name + "," + playerEntity + "," + turnEntity + ","
+                + boardEntity + "]";
     }
 
 }

@@ -49,6 +49,7 @@ public class ControllerFactoryEJB extends ControllerFactory {
         this.showGameController = new ShowGameControllerEJB(ticTacToeStatesManager);
         this.placeCardController = new PlaceCardControllerEJB(ticTacToeStatesManager);
         this.saveGameController = new SaveGameControllerEJB(ticTacToeStatesManager);
+        this.openGameController = new OpenGameControllerEJB(ticTacToeStatesManager);
     }
 
     @Override
