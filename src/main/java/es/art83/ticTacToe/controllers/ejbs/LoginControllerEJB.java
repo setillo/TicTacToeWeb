@@ -7,11 +7,11 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class LoginControllerEJB extends ControllerEJB implements LoginController {
 
-    public LoginControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+    public LoginControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 
-    private void login(PlayerEntity player) {
+    private void changeSate(PlayerEntity player) {
         assert this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.INITIAL
                 || this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
         this.getTicTacToeStatesManager().setPlayer(player);
@@ -19,26 +19,26 @@ public class LoginControllerEJB extends ControllerEJB implements LoginController
     }
 
     @Override
-    public boolean read(PlayerEntity player) {
+    public boolean login(PlayerEntity player) {
+        boolean result = false;
         PlayerEntity playerBD = DAOFactory.getFactory().getPlayerDAO().read(player.getUser());
         if (playerBD != null && playerBD.getPassword().equals(player.getPassword())) {
-            this.login(playerBD);
-            return true;
-        } else {
-            return false;
+            this.changeSate(playerBD);
+            result = true;
         }
+        return result;
     }
 
     @Override
-    public boolean create(PlayerEntity player) {
+    public boolean register(PlayerEntity player) {
+        boolean result = false;
         PlayerEntity playerBD = DAOFactory.getFactory().getPlayerDAO().read(player.getUser());
         if (playerBD == null) {
             DAOFactory.getFactory().getPlayerDAO().create(player);
-            this.login(player);
-            return true;
-        } else {
-            return false;
+            this.changeSate(player);
+            result = true;
         }
+        return result;
     }
 
 }

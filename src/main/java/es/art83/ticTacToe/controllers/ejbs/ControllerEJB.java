@@ -4,13 +4,13 @@ import es.art83.ticTacToe.controllers.Controller;
 
 public class ControllerEJB implements Controller{
     
-    private TicTacToeStatesManager ticTacToeStatesManager;
+    private TicTacToeApplicationManager ticTacToeStatesManager;
 
-    public ControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+    public ControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
        this.ticTacToeStatesManager = ticTacToeStatesManager;
     }
     
-    protected TicTacToeStatesManager getTicTacToeStatesManager() {
+    protected TicTacToeApplicationManager getTicTacToeStatesManager() {
         return ticTacToeStatesManager;
     }
 

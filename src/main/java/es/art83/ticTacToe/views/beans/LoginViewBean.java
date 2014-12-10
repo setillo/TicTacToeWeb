@@ -8,35 +8,36 @@ import javax.faces.context.FacesContext;
 import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.controllers.LoginController;
-import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
+import es.art83.ticTacToe.controllers.LogoutController;
 
 @ManagedBean
 public class LoginViewBean extends PlayerViewBean {
-    private boolean finalState;
-
-    public boolean isFinalState() {
-        return finalState;
-    }
+    private boolean bye;
 
     @PostConstruct
     public void update() {
-        this.finalState = this.getControllerFactory().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
+        LogoutController logoutController = this.getControllerFactory().getLogoutController();
+        this.bye = logoutController.isBye();
     }
 
-    public String process() {
+    public boolean isBye() {
+        return this.bye;
+    }
+
+    public String login() {
+        String next = null;
         LoginController loginController = this.getControllerFactory().getLoginController();
-        boolean ok = loginController.read(this.getPlayer());
+        boolean ok = loginController.login(this.getPlayer());
         if (!ok) {
             FacesContext.getCurrentInstance().addMessage("loginViewBean",
                     new FacesMessage("usuario o clave incorrecta"));
-            return "login";
         } else {
             LogManager.getLogger(loginController.getClass().getName()).info(
                     "Usuario Logeado: " + this.getPlayer().toString());
 
-            return "logged/game";
+            next = "logged/game";
         }
-
+        return next;
     }
 
 }

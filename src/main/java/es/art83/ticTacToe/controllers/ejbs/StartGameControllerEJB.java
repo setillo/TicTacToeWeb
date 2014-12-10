@@ -8,7 +8,7 @@ import es.art83.ticTacToe.models.entities.PlayerEntity;
 
 public class StartGameControllerEJB extends ControllerEJB implements StartGameController {
 
-    public StartGameControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+    public StartGameControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 

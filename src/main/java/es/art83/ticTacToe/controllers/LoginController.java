@@ -4,8 +4,8 @@ import es.art83.ticTacToe.models.entities.PlayerEntity;
 
 public interface LoginController extends Controller{
 
-    boolean read(PlayerEntity user);
+    boolean login(PlayerEntity user);
 
-    boolean create(PlayerEntity user);
+    boolean register(PlayerEntity user);
 
 }

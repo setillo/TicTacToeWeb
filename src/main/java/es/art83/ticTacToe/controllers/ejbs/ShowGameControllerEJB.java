@@ -8,7 +8,7 @@ import es.art83.ticTacToe.models.utils.ColorModel;
 
 public class ShowGameControllerEJB extends ControllerEJB implements ShowGameController {
 
-    public ShowGameControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+    public ShowGameControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 

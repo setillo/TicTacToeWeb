@@ -7,17 +7,22 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class OpenGameControllerEJB extends ControllerEJB implements OpenGameController {
 
-    public OpenGameControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+    public OpenGameControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 
+    private void changeSate() {
+        this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.OPENED_GAME);
+    }
+ 
+    
     @Override
     public void openGame(String gameNameSelected) {
         GameEntity game = DAOFactory.getFactory().getGameDAO()
                 .findGame(this.getTicTacToeStatesManager().getPlayer(), gameNameSelected);
         this.getTicTacToeStatesManager().setGame(game);
-        this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.OPENED_GAME);
         this.getTicTacToeStatesManager().setSaved(true);
+        this.changeSate();
     }
 
 }

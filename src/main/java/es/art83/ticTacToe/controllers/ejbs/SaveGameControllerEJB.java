@@ -7,7 +7,7 @@ import es.art83.ticTacToe.models.daos.DAOFactory;
 
 public class SaveGameControllerEJB extends ControllerEJB implements SaveGameController {
 
-    public SaveGameControllerEJB(TicTacToeStatesManager ticTacToeStatesManager) {
+    public SaveGameControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 

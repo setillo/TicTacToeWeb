@@ -4,4 +4,6 @@ public interface LogoutController extends Controller{
 
     void logout();
 
+    boolean isBye();
+
 }
