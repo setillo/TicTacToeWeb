@@ -17,10 +17,16 @@ public class SaveViewBean extends ViewBean {
 
     private String gameName;
 
+    private boolean overWrite = false;
+
     @PostConstruct
     public void update() {
         this.gameNames = this.getControllerFactory().getSaveGameController().gameNames();
         this.gameName = this.getControllerFactory().getSaveGameController().getGameName();
+    }
+
+    public boolean isOverWrite() {
+        return this.overWrite;
     }
 
     public List<String> getGameNames() {
@@ -42,8 +48,9 @@ public class SaveViewBean extends ViewBean {
     public String saveGame() {
         String next = null;
         if (this.gameNames.contains(this.gameName)) {
-            FacesContext.getCurrentInstance().addMessage("saveViewBean:gameName",
+            FacesContext.getCurrentInstance().addMessage("over",
                     new FacesMessage("Game name exist!!!"));
+            this.overWrite = true;
         } else {
             SaveGameController saveGameController = this.getControllerFactory()
                     .getSaveGameController();
