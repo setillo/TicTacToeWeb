@@ -12,7 +12,9 @@
 	<h:form id="loginViewBean">
 		<h:panelGrid columns="2">
 			<h:messages for="loginViewBean" style="color:red" />
-			<h:panelGroup> <h:outputText rendered="#{loginViewBean.finalState}" value="Bye!!!" /></h:panelGroup>
+			<h:panelGroup>
+				<h:outputText rendered="#{loginViewBean.finalState}" value="Bye!!!" />
+			</h:panelGroup>
 			<h:inputText id="user" value="#{loginViewBean.player.user}" />
 			<h:outputText />
 			<h:inputText id="password" value="#{loginViewBean.player.password}" />
