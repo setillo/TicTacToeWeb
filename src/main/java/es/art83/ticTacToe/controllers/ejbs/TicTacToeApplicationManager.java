@@ -17,7 +17,7 @@ public class TicTacToeApplicationManager {
         this.ticTacToeStateModel = TicTacToeStateModel.INITIAL;
         this.player = null;
         this.game = null;
-        this.saved = false;
+        this.saved = true;
     }
 
     protected TicTacToeStateModel getTicTacToeStateModel() {

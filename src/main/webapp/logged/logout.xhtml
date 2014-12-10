@@ -14,7 +14,7 @@
 		<h:panelGrid columns="2">
 			<h:outputText value="To exit without saving the game?" />
 			<h:outputText value="" />
-            <h:commandButton value="Yes" action="game.jsf" />
+            <h:commandButton value="Yes" action="#{logoutViewBean.logout}" />
 			<h:commandButton value="No" action="save.jsf" />
 		</h:panelGrid>
 	</h:form>

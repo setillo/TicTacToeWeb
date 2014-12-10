@@ -11,9 +11,9 @@ import es.art83.ticTacToe.controllers.CreateGameController;
 import es.art83.ticTacToe.controllers.LogoutController;
 import es.art83.ticTacToe.controllers.OpenGameController;
 import es.art83.ticTacToe.controllers.PlaceCardController;
+import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.models.entities.CoordinateEntity;
 import es.art83.ticTacToe.models.utils.ColorModel;
-import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 @ManagedBean
 public class GameViewBean extends ViewBean {
@@ -22,7 +22,7 @@ public class GameViewBean extends ViewBean {
 
     private String gameNameSelected;
 
-    private boolean openedGame;
+    private boolean createdGame;
 
     private String nameGame;
 
@@ -48,8 +48,9 @@ public class GameViewBean extends ViewBean {
 
     @PostConstruct
     public void update() {
-        this.openedGame = this.getControllerFactory().getTicTacToeApplicationModel() == TicTacToeStateModel.OPENED_GAME;
-        if (this.openedGame) {
+        ShowGameController showGameController = this.getControllerFactory().getShowGameController();
+        this.createdGame = showGameController.createdGame();
+        if (this.createdGame) {
             this.nameGame = this.getControllerFactory().getShowGameController().getNameGame();
             this.fichas = this.getControllerFactory().getShowGameController().completeBoard();
             this.gameOver = this.getControllerFactory().getShowGameController().isGameOver();
@@ -82,8 +83,8 @@ public class GameViewBean extends ViewBean {
         return this.gameNames;
     }
 
-    public boolean isOpenedGame() {
-        return this.openedGame;
+    public boolean isCreatedGame() {
+        return this.createdGame;
     }
 
     public boolean isZeroGameNames() {

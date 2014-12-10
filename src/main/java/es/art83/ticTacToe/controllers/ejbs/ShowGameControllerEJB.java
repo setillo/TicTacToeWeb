@@ -5,6 +5,7 @@ import java.util.List;
 import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.models.entities.CoordinateEntity;
 import es.art83.ticTacToe.models.utils.ColorModel;
+import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class ShowGameControllerEJB extends ControllerEJB implements ShowGameController {
 
@@ -44,17 +45,24 @@ public class ShowGameControllerEJB extends ControllerEJB implements ShowGameCont
 
     @Override
     public boolean isFullBoard() {
-        return  this.getTicTacToeStatesManager().getGame().isFullBoard();
+        return this.getTicTacToeStatesManager().getGame().isFullBoard();
     }
 
     @Override
     public List<CoordinateEntity> validSourceCoordinates() {
-        return  this.getTicTacToeStatesManager().getGame().validSourceCoordinates();
+        return this.getTicTacToeStatesManager().getGame().validSourceCoordinates();
     }
 
     @Override
     public List<CoordinateEntity> validDestinationCoordinates() {
-        return  this.getTicTacToeStatesManager().getGame().validDestinationCoordinates();
+        return this.getTicTacToeStatesManager().getGame().validDestinationCoordinates();
+    }
+
+    @Override
+    public boolean createdGame() {
+        boolean result = this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
+        result = result || this.getTicTacToeStatesManager().getGame() != null;
+        return result;
     }
 
 }
