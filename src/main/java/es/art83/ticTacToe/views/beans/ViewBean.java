@@ -16,5 +16,5 @@ public abstract class ViewBean {
     protected ControllerFactory getControllerFactory() {
         return controllerFactory;
     }
-    
+
 }
