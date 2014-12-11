@@ -53,7 +53,7 @@ public class CoordinateEntity {
         return coordenadas;
     }
 
-    public DirectionModel direccion(CoordinateEntity otra) {
+    public DirectionModel direction(CoordinateEntity otra) {
         if (this.getRow() == otra.getRow()) {
             return DirectionModel.EN_FILA;
         } else if (this.getColumn() == otra.getColumn()) {
@@ -68,10 +68,10 @@ public class CoordinateEntity {
         }
     }
 
-    public DirectionModel direccion(CoordinateEntity[] coordenadas) {
-        DirectionModel dir = this.direccion(coordenadas[0]);
+    public DirectionModel direction(CoordinateEntity[] coordenadas) {
+        DirectionModel dir = this.direction(coordenadas[0]);
         for (CoordinateEntity coor : coordenadas) {
-            if (dir != this.direccion(coor))
+            if (dir != this.direction(coor))
                 return DirectionModel.SIN_DIRECION;
         }
         return dir;

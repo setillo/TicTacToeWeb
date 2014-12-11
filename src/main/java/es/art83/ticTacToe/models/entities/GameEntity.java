@@ -66,7 +66,7 @@ public class GameEntity {
     }
 
     public boolean isGameOver() {
-        return this.board.hayTER();
+        return this.board.existTicTacToe();
     }
 
     public ColorModel[][] completeBoard() {
@@ -82,24 +82,24 @@ public class GameEntity {
     }
 
     public boolean isFullBoard() {
-        return this.board.tableroCompleto();
+        return this.board.fullBoard();
     }
 
     public List<CoordinateEntity> validSourceCoordinates() {
-        return this.board.coordenadas(this.turnColor());
+        return this.board.coordinates(this.turnColor());
     }
 
     public List<CoordinateEntity> validDestinationCoordinates() {
-        return this.board.coordenadasDestinosValidas();
+        return this.board.validDestinationCoordinates();
     }
 
     public void placeCard(CoordinateEntity coordinate) {
-        this.board.poner(new PieceEntity(this.getTurn().getColor(), coordinate));
+        this.board.put(new PieceEntity(this.getTurn().getColor(), coordinate));
         this.turn.change();
     }
 
     public void placeCard(CoordinateEntity source, CoordinateEntity destination) {
-        this.board.quitar(source);
+        this.board.remove(source);
         this.placeCard(destination);
     }
 

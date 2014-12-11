@@ -7,6 +7,9 @@ import es.art83.ticTacToe.models.utils.ColorModel;
 import es.art83.ticTacToe.models.utils.DirectionModel;
 
 public class BoardEntity {
+    private static final int FULL_BOARD = 6;
+    private static final int TIC_TAC_TOE = FULL_BOARD / 2;
+
     private List<PieceEntity> pieces;
 
     public BoardEntity() {
@@ -25,15 +28,15 @@ public class BoardEntity {
         this.pieces = pieces;
     }
 
-    public List<CoordinateEntity> coordenadasDestinosValidas() {
-        List<CoordinateEntity> vacias = CoordinateEntity.allCoordinates();
+    public List<CoordinateEntity> validDestinationCoordinates() {
+        List<CoordinateEntity> coordinates = CoordinateEntity.allCoordinates();
         for (PieceEntity ficha : pieces) {
-            vacias.remove(ficha.getCoordinate());
+            coordinates.remove(ficha.getCoordinate());
         }
-        return vacias;
+        return coordinates;
     }
 
-    public List<CoordinateEntity> coordenadasColor(ColorModel color) {
+    public List<CoordinateEntity> coordinatesColor(ColorModel color) {
         List<CoordinateEntity> coordenadas = new ArrayList<>();
         for (PieceEntity ficha : this.pieces) {
             if (ficha.getColor().equals(color))
@@ -42,35 +45,35 @@ public class BoardEntity {
         return coordenadas;
     }
 
-    public void poner(PieceEntity ficha) {
+    public void put(PieceEntity ficha) {
         this.pieces.add(ficha);
     }
 
-    public boolean hayTER(ColorModel color) {
-        List<CoordinateEntity> posiciones = this.coordenadasColor(color);
-        if (posiciones.size() < 3) {
+    public boolean existTicTacToe(ColorModel color) {
+        List<CoordinateEntity> posiciones = this.coordinatesColor(color);
+        if (posiciones.size() < TIC_TAC_TOE) {
             return false;
         } else {
             CoordinateEntity primera = posiciones.get(0);
             posiciones.remove(primera);
-            return DirectionModel.SIN_DIRECION != primera.direccion(posiciones
+            return DirectionModel.SIN_DIRECION != primera.direction(posiciones
                     .toArray(new CoordinateEntity[0]));
         }
     }
 
-    public boolean hayTER() {
+    public boolean existTicTacToe() {
         for (ColorModel color : ColorModel.values()) {
-            if (hayTER(color))
+            if (existTicTacToe(color))
                 return true;
         }
         return false;
     }
 
-    public boolean tableroCompleto() {
-        return this.pieces.size() == 6;
+    public boolean fullBoard() {
+        return this.pieces.size() == FULL_BOARD;
     }
 
-    public void quitar(CoordinateEntity coordenada) {
+    public void remove(CoordinateEntity coordenada) {
         for (PieceEntity ficha : pieces) {
             if (ficha.getCoordinate().equals(coordenada)) {
                 this.pieces.remove(ficha);
@@ -79,7 +82,7 @@ public class BoardEntity {
         }
     }
 
-    public List<CoordinateEntity> coordenadas(ColorModel color) {
+    public List<CoordinateEntity> coordinates(ColorModel color) {
         List<CoordinateEntity> corrdenadasColor = new ArrayList<>();
         for (PieceEntity ficha : pieces) {
             if (ficha.getColor() == color)
