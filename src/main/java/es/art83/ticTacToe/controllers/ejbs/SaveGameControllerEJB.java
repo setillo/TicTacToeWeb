@@ -13,7 +13,7 @@ public class SaveGameControllerEJB extends ControllerEJB implements SaveGameCont
 
     @Override
     public List<String> gameNames() {
-        return DAOFactory.getFactory().getGameDAO().findPlayerNamesGames(this.getTicTacToeStatesManager().getPlayer());
+        return DAOFactory.getFactory().getGameDAO().findPlayerGameNames(this.getTicTacToeStatesManager().getPlayer());
     }
 
     @Override

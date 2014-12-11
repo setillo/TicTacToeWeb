@@ -10,38 +10,40 @@ public class CoordinateEntity {
 
     public static final int MAX = 2;
 
-    private int id;
+    private int row, column;
 
-    private int fila, columna;
-
-    public CoordinateEntity(int fila, int columna) {
-        this.fila = fila;
-        this.columna = columna;
+    public CoordinateEntity(int row, int column) {
+        this.setRow(row);
+        this.setColumn(column);
     }
 
     public CoordinateEntity(String coordenada) {
         String[] campos = coordenada.split("-");
-        this.fila = Integer.valueOf(campos[0]);
-        this.columna = Integer.valueOf(campos[1]);
+        this.row = Integer.valueOf(campos[0]);
+        this.column = Integer.valueOf(campos[1]);
     }
 
-    public int getId() {
-        return id;
+    public CoordinateEntity() {
+        this(0, 0);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getRow() {
+        return this.row;
     }
 
-    public int getFila() {
-        return fila;
+    public void setRow(int row) {
+        this.row = row;
     }
 
-    public int getColumna() {
-        return columna;
+    public int getColumn() {
+        return this.column;
     }
 
-    public static List<CoordinateEntity> posibles() {
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public static List<CoordinateEntity> allCoordinates() {
         List<CoordinateEntity> coordenadas = new ArrayList<>();
         for (int i = MIN; i < MAX + 1; i++) {
             for (int j = MIN; j < MAX + 1; j++) {
@@ -52,14 +54,14 @@ public class CoordinateEntity {
     }
 
     public DirectionModel direccion(CoordinateEntity otra) {
-        if (this.getFila() == otra.getFila()) {
+        if (this.getRow() == otra.getRow()) {
             return DirectionModel.EN_FILA;
-        } else if (this.getColumna() == otra.getColumna()) {
+        } else if (this.getColumn() == otra.getColumn()) {
             return DirectionModel.EN_COLUMNA;
-        } else if (this.getColumna() == this.getFila() && otra.getColumna() == otra.getColumna()) {
+        } else if (this.getColumn() == this.getRow() && otra.getColumn() == otra.getColumn()) {
             return DirectionModel.EN_DIAGONAL_PRINCIPAL;
-        } else if (this.getColumna() + this.getFila() == MAX
-                && otra.getColumna() + otra.getFila() == MAX) {
+        } else if (this.getColumn() + this.getRow() == MAX
+                && otra.getColumn() + otra.getRow() == MAX) {
             return DirectionModel.EN_DIAGONAL_SECUNDARIA;
         } else {
             return DirectionModel.SIN_DIRECION;
@@ -79,21 +81,21 @@ public class CoordinateEntity {
     public boolean equals(Object obj) {
         assert obj != null;
         CoordinateEntity other = (CoordinateEntity) obj;
-        return this.getColumna() == other.getColumna() && this.getFila() == other.getFila();
+        return this.column == other.column && this.row == other.row;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + this.getColumna();
-        result = prime * result + this.getFila();
+        result = prime * result + this.getColumn();
+        result = prime * result + this.getRow();
         return result;
     }
 
     @Override
     public String toString() {
-        return fila + "-" + columna;
+        return row + "-" + column ;
     }
 
 }

@@ -5,33 +5,32 @@ import java.util.List;
 import es.art83.ticTacToe.models.utils.ColorModel;
 
 public class GameEntity {
-    private int id;
-
     private String name;
 
-    private PlayerEntity playerEntity;
+    private PlayerEntity player;
 
-    private TurnEntity turnEntity;
+    private TurnEntity turn;
 
-    private BoardEntity boardEntity;
+    private BoardEntity board;
+
+    public GameEntity(String name, PlayerEntity playerEntity, BoardEntity boardClone,
+            TurnEntity turnClone) {
+        this.setName(name);
+        this.setPlayer(playerEntity);
+        this.setBoardEntity(boardClone);
+        this.setTurn(turnClone);
+    }
 
     public GameEntity(String name, PlayerEntity playerEntity) {
-        this.name = name;
-        this.playerEntity = playerEntity;
-        this.turnEntity = new TurnEntity();
-        this.boardEntity = new BoardEntity();
+        this(name, playerEntity, new BoardEntity(), new TurnEntity());
     }
 
     public GameEntity(PlayerEntity playerEntity) {
-        this(null, playerEntity);
+        this(null, playerEntity, null, null);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public GameEntity() {
+        this(null, null, null, null);
     }
 
     public String getName() {
@@ -42,72 +41,109 @@ public class GameEntity {
         this.name = name;
     }
 
-    public PlayerEntity getPlayerEntity() {
-        return playerEntity;
+    public PlayerEntity getPlayer() {
+        return this.player;
     }
 
-    public void setPlayerEntity(PlayerEntity playerEntity) {
-        this.playerEntity = playerEntity;
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
     }
 
-    public TurnEntity getTurnEntity() {
-        return turnEntity;
+    public TurnEntity getTurn() {
+        return this.turn;
     }
 
-    public void setTurnEntity(TurnEntity turnEntity) {
-        this.turnEntity = turnEntity;
+    public void setTurn(TurnEntity turn) {
+        this.turn = turn;
     }
 
-    public BoardEntity getBoardEntity() {
-        return boardEntity;
+    public BoardEntity getBoard() {
+        return board;
     }
 
-    public void setBoardEntity(BoardEntity boardEntity) {
-        this.boardEntity = boardEntity;
+    public void setBoardEntity(BoardEntity board) {
+        this.board = board;
     }
 
     public boolean isGameOver() {
-        return this.boardEntity.hayTER();
+        return this.board.hayTER();
     }
 
     public ColorModel[][] completeBoard() {
-        return this.boardEntity.completeBoard();
+        return this.board.completeBoard();
     }
 
     public ColorModel winner() {
-        return this.turnEntity.colorContrario();
+        return this.turn.getColorChanged();
     }
 
     public ColorModel turnColor() {
-        return this.turnEntity.getColor();
+        return this.turn.getColor();
     }
 
     public boolean isFullBoard() {
-        return this.boardEntity.tableroCompleto();
+        return this.board.tableroCompleto();
     }
 
     public List<CoordinateEntity> validSourceCoordinates() {
-        return this.boardEntity.coordenadas(this.turnColor());
+        return this.board.coordenadas(this.turnColor());
     }
 
     public List<CoordinateEntity> validDestinationCoordinates() {
-        return this.boardEntity.coordenadasDestinosValidas();
+        return this.board.coordenadasDestinosValidas();
     }
 
-    public void placeCard(CoordinateEntity coordinateEntity) {
-        this.boardEntity.poner(new PieceEntity(this.getTurnEntity().getColor(), coordinateEntity));
-        this.turnEntity.cambiar();
+    public void placeCard(CoordinateEntity coordinate) {
+        this.board.poner(new PieceEntity(this.getTurn().getColor(), coordinate));
+        this.turn.change();
     }
 
     public void placeCard(CoordinateEntity source, CoordinateEntity destination) {
-        this.boardEntity.quitar(source);
+        this.board.quitar(source);
         this.placeCard(destination);
+    }
+
+    public void update(GameEntity game) {
+        this.turn.update(game.turn);
+        this.board.update(game.board);
+        this.setName(game.getName());
+        this.setPlayer(game.getPlayer());
     }
 
     @Override
     public String toString() {
-        return "GameEntity[" + id + ":" + name + "," + playerEntity + "," + turnEntity + ","
-                + boardEntity + "]";
+        return "GameEntity[" + name + "," + player + "," + turn + "," + board + "]";
+    }
+
+    @Override
+    public GameEntity clone() {
+        BoardEntity boardClone = this.board.clone();
+        TurnEntity turnClone = this.turn.clone();
+        return new GameEntity(this.name, this.player, boardClone, turnClone);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((player == null) ? 0 : player.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        assert obj != null;
+        GameEntity other = (GameEntity) obj;
+        boolean result;
+
+        if (this.name == null) {
+            result = other.name == null;
+        } else {
+            result = other.name != null && this.name.equals(other.name);
+        }
+
+        return result && this.player.equals(other.player);
     }
 
 }

@@ -6,23 +6,30 @@ import es.art83.ticTacToe.models.entities.PlayerEntity;
 public class PlayerDAOMemory extends GenericDAOMemory<PlayerEntity, String> implements PlayerDAO {
 
     @Override
-    protected String getId(PlayerEntity entity) {
-        return entity.getUser();
+    public void create(PlayerEntity entity) {
+        assert !getEntityList().contains(entity);
+        getEntityList().add(entity.clone());
     }
 
     @Override
-    public void create(PlayerEntity entity) {
-        PlayerEntity player = new PlayerEntity();
-        player.setUser(entity.getUser());
-        player.setPassword(entity.getPassword());
-        this.getBd().put(player.getUser(), player);
+    public PlayerEntity read(String id) {
+        PlayerEntity playerBD = null;
+        int index = getEntityList().indexOf(new PlayerEntity(id, null));
+        if (index != -1) {
+            playerBD = getEntityList().get(index).clone();
+        }
+        return playerBD;
     }
 
     @Override
     public void update(PlayerEntity entity) {
-        PlayerEntity player = this.read(entity.getUser());
-        assert player != null;
-        player.setPassword(entity.getPassword());
+        PlayerEntity playerBD = this.getEntityList().get(this.getEntityList().indexOf(entity));
+        playerBD.update(entity);
+    }
+
+    @Override
+    public void deleteByID(String id) {
+        this.delete(new PlayerEntity(id, null));
     }
 
 }

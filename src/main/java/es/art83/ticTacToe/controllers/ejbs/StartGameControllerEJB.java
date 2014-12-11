@@ -15,7 +15,7 @@ public class StartGameControllerEJB extends ControllerEJB implements StartGameCo
     @Override
     public List<String> readGameNames() {
         PlayerEntity player = this.getTicTacToeStatesManager().getPlayer();
-        return DAOFactory.getFactory().getGameDAO().findPlayerNamesGames(player);
+        return DAOFactory.getFactory().getGameDAO().findPlayerGameNames(player);
     }
 
 }

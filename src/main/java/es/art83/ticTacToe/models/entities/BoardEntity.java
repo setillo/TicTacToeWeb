@@ -7,49 +7,43 @@ import es.art83.ticTacToe.models.utils.ColorModel;
 import es.art83.ticTacToe.models.utils.DirectionModel;
 
 public class BoardEntity {
-    private int id;
-
-    private List<PieceEntity> fichas;
+    private List<PieceEntity> pieces;
 
     public BoardEntity() {
-        this.fichas = new ArrayList<>();
+        this(new ArrayList<>());
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public BoardEntity(List<PieceEntity> list) {
+        this.setPieces(list);
     }
 
-    public Integer getId() {
-        return this.id;
+    public List<PieceEntity> getPieces() {
+        return this.pieces;
     }
 
-    public List<PieceEntity> getFichas() {
-        return this.fichas;
-    }
-
-    public void setFichas(List<PieceEntity> fichas) {
-        this.fichas = fichas;
+    public void setPieces(List<PieceEntity> pieces) {
+        this.pieces = pieces;
     }
 
     public List<CoordinateEntity> coordenadasDestinosValidas() {
-        List<CoordinateEntity> vacias = CoordinateEntity.posibles();
-        for (PieceEntity ficha : fichas) {
-            vacias.remove(ficha.getCoordenada());
+        List<CoordinateEntity> vacias = CoordinateEntity.allCoordinates();
+        for (PieceEntity ficha : pieces) {
+            vacias.remove(ficha.getCoordinate());
         }
         return vacias;
     }
 
     public List<CoordinateEntity> coordenadasColor(ColorModel color) {
         List<CoordinateEntity> coordenadas = new ArrayList<>();
-        for (PieceEntity ficha : this.fichas) {
+        for (PieceEntity ficha : this.pieces) {
             if (ficha.getColor().equals(color))
-                coordenadas.add(ficha.getCoordenada());
+                coordenadas.add(ficha.getCoordinate());
         }
         return coordenadas;
     }
 
     public void poner(PieceEntity ficha) {
-        this.fichas.add(ficha);
+        this.pieces.add(ficha);
     }
 
     public boolean hayTER(ColorModel color) {
@@ -73,13 +67,13 @@ public class BoardEntity {
     }
 
     public boolean tableroCompleto() {
-        return this.fichas.size() == 6;
+        return this.pieces.size() == 6;
     }
 
     public void quitar(CoordinateEntity coordenada) {
-        for (PieceEntity ficha : fichas) {
-            if (ficha.getCoordenada().equals(coordenada)) {
-                this.fichas.remove(ficha);
+        for (PieceEntity ficha : pieces) {
+            if (ficha.getCoordinate().equals(coordenada)) {
+                this.pieces.remove(ficha);
                 break;
             }
         }
@@ -87,29 +81,40 @@ public class BoardEntity {
 
     public List<CoordinateEntity> coordenadas(ColorModel color) {
         List<CoordinateEntity> corrdenadasColor = new ArrayList<>();
-        for (PieceEntity ficha : fichas) {
+        for (PieceEntity ficha : pieces) {
             if (ficha.getColor() == color)
-                corrdenadasColor.add(ficha.getCoordenada());
+                corrdenadasColor.add(ficha.getCoordinate());
         }
         return corrdenadasColor;
     }
 
     public void clear() {
-        this.fichas.clear();
+        this.pieces.clear();
     }
 
     public ColorModel[][] completeBoard() {
         ColorModel[][] matriz = new ColorModel[3][3];
-        for (PieceEntity ficha : fichas) {
-            matriz[ficha.getCoordenada().getFila()][ficha.getCoordenada().getColumna()] = ficha
+        for (PieceEntity ficha : pieces) {
+            matriz[ficha.getCoordinate().getRow()][ficha.getCoordinate().getColumn()] = ficha
                     .getColor();
         }
         return matriz;
     }
 
+    public void update(BoardEntity board) {
+        List<PieceEntity> pieces = new ArrayList<>(board.pieces);
+        this.setPieces(pieces);
+    }
+
     @Override
     public String toString() {
-        return "BoardEntity[" + id + ":" + fichas + "]";
+        return "BoardEntity[" + pieces + "]";
     }
-    
+
+    @Override
+    protected BoardEntity clone() {
+        List<PieceEntity> pieces = new ArrayList<>(this.pieces);
+        return new BoardEntity(pieces);
+    }
+
 }
