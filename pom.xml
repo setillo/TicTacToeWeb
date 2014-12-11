@@ -27,6 +27,16 @@
 			<artifactId>javax.faces</artifactId>
 			<version>2.2.8</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>2.5.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
