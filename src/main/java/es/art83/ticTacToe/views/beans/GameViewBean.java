@@ -179,7 +179,9 @@ public class GameViewBean extends ViewBean {
         } else {
             placeCardController.placeCard(new CoordinateEntity(this.selectedDestinationCoordinate));
         }
-        LogManager.getLogger(placeCardController.getClass().getName()).info("Place card");
+        LogManager.getLogger(placeCardController.getClass().getName()).info(
+                "Place card: " + this.selectedSourceCoordinate + ">"
+                        + this.selectedDestinationCoordinate);
         this.update();
         return null;
     }
