@@ -115,7 +115,7 @@ public class BoardEntity {
     }
 
     @Override
-    protected BoardEntity clone() {
+    public BoardEntity clone() {
         List<PieceEntity> pieces = new ArrayList<>(this.pieces);
         return new BoardEntity(pieces);
     }

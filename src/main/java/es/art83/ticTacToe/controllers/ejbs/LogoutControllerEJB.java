@@ -5,32 +5,32 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class LogoutControllerEJB extends ControllerEJB implements LogoutController {
 
-    public LogoutControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
+    public LogoutControllerEJB(TicTacToeContext ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
     
     private void changeState(){
-        this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.FINAL);
+        this.getTicTacToeContext().setTicTacToeStateModel(TicTacToeStateModel.FINAL);
     }
 
     @Override
     public void logout() {
-        assert this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME
-                || this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME;
-        this.getTicTacToeStatesManager().setPlayer(null);
-        this.getTicTacToeStatesManager().setGame(null);
-        this.getTicTacToeStatesManager().setSaved(true);
+        assert this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME
+                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME;
+        this.getTicTacToeContext().setPlayer(null);
+        this.getTicTacToeContext().setGame(null);
+        this.getTicTacToeContext().setSaved(true);
         this.changeState();
     }
 
     @Override
     public boolean isBye() {
-        return this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
+        return this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
     }
 
     @Override
     public boolean savedGame() {
-        return this.getTicTacToeStatesManager().isSavedGame();
+        return this.getTicTacToeContext().isSavedGame();
     }
 
 }

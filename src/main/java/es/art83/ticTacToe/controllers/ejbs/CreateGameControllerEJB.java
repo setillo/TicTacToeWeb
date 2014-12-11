@@ -6,15 +6,15 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class CreateGameControllerEJB extends ControllerEJB implements CreateGameController {
 
-    public CreateGameControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
+    public CreateGameControllerEJB(TicTacToeContext ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 
     @Override
     public void createGame() {
-        assert this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME;
-        this.getTicTacToeStatesManager().setGame(new GameEntity(this.getTicTacToeStatesManager().getPlayer()));
-        this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.OPENED_GAME);
+        assert this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME;
+        this.getTicTacToeContext().setGame(new GameEntity(this.getTicTacToeContext().getPlayer()));
+        this.getTicTacToeContext().setTicTacToeStateModel(TicTacToeStateModel.OPENED_GAME);
     }
 
 }

@@ -19,7 +19,7 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 @SessionScoped
 public class ControllerFactoryEJB extends ControllerFactory {
 
-    private TicTacToeApplicationManager ticTacToeApplicationManager;
+    private TicTacToeContext ticTacToeApplicationManager;
 
     private LoginController loginController;
 
@@ -40,7 +40,7 @@ public class ControllerFactoryEJB extends ControllerFactory {
     private SaveGameController saveGameController;
 
     public ControllerFactoryEJB() {
-        this.ticTacToeApplicationManager = new TicTacToeApplicationManager();
+        this.ticTacToeApplicationManager = new TicTacToeContext();
         this.loginController = new LoginControllerEJB(ticTacToeApplicationManager);
         this.logoutController = new LogoutControllerEJB(ticTacToeApplicationManager);
         this.startGameController = new StartGameControllerEJB(ticTacToeApplicationManager);

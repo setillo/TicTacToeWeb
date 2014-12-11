@@ -7,15 +7,15 @@ import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 public class LoginControllerEJB extends ControllerEJB implements LoginController {
 
-    public LoginControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
+    public LoginControllerEJB(TicTacToeContext ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 
     private void changeSate(PlayerEntity player) {
-        assert this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.INITIAL
-                || this.getTicTacToeStatesManager().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
-        this.getTicTacToeStatesManager().setPlayer(player);
-        this.getTicTacToeStatesManager().setTicTacToeStateModel(TicTacToeStateModel.CLOSED_GAME);
+        assert this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.INITIAL
+                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
+        this.getTicTacToeContext().setPlayer(player);
+        this.getTicTacToeContext().setTicTacToeStateModel(TicTacToeStateModel.CLOSED_GAME);
     }
 
     @Override

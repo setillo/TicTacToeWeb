@@ -8,13 +8,13 @@ import es.art83.ticTacToe.models.entities.PlayerEntity;
 
 public class StartGameControllerEJB extends ControllerEJB implements StartGameController {
 
-    public StartGameControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
+    public StartGameControllerEJB(TicTacToeContext ticTacToeStatesManager) {
         super(ticTacToeStatesManager);
     }
 
     @Override
     public List<String> readGameNames() {
-        PlayerEntity player = this.getTicTacToeStatesManager().getPlayer();
+        PlayerEntity player = this.getTicTacToeContext().getPlayer();
         return DAOFactory.getFactory().getGameDAO().findPlayerGameNames(player);
     }
 

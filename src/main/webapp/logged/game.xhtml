@@ -16,7 +16,7 @@
 			<legend>Board</legend>
 			<h:panelGroup rendered="#{gameViewBean.gameNamed}">
 				<h:outputText value="Game: " />
-				<h:outputText value="#{gameViewBean.nameGame}" />
+				<h:outputText value="#{gameViewBean.gameName}" />
 			</h:panelGroup>
 			<h:dataTable border="1" value="#{gameViewBean.fichas}" var="fila">
 				<h:column>#{fila[0]}</h:column>

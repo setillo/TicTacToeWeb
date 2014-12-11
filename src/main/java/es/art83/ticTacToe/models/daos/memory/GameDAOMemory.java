@@ -35,7 +35,6 @@ public class GameDAOMemory extends GenericDAOMemory<GameEntity, Integer> impleme
     public void deleteByID(Integer id) {
     }
 
-
     @Override
     public List<String> findPlayerGameNames(PlayerEntity player) {
         List<String> gameNames = new ArrayList<>();

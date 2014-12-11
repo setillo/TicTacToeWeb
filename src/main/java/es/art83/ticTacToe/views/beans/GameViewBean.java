@@ -11,6 +11,7 @@ import es.art83.ticTacToe.controllers.CreateGameController;
 import es.art83.ticTacToe.controllers.LogoutController;
 import es.art83.ticTacToe.controllers.OpenGameController;
 import es.art83.ticTacToe.controllers.PlaceCardController;
+import es.art83.ticTacToe.controllers.SaveGameController;
 import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.models.entities.CoordinateEntity;
 import es.art83.ticTacToe.models.utils.ColorModel;
@@ -24,7 +25,7 @@ public class GameViewBean extends ViewBean {
 
     private boolean createdGame;
 
-    private String nameGame;
+    private String gameName;
 
     private ColorModel[][] fichas;
 
@@ -51,7 +52,7 @@ public class GameViewBean extends ViewBean {
         ShowGameController showGameController = this.getControllerFactory().getShowGameController();
         this.createdGame = showGameController.createdGame();
         if (this.createdGame) {
-            this.nameGame = this.getControllerFactory().getShowGameController().getNameGame();
+            this.gameName = this.getControllerFactory().getShowGameController().getNameGame();
             this.fichas = this.getControllerFactory().getShowGameController().completeBoard();
             this.gameOver = this.getControllerFactory().getShowGameController().isGameOver();
             if (this.gameOver) {
@@ -92,11 +93,11 @@ public class GameViewBean extends ViewBean {
     }
 
     public boolean isGameNamed() {
-        return this.nameGame != null;
+        return this.gameName != null;
     }
 
-    public String getNameGame() {
-        return this.nameGame;
+    public String getGameName() {
+        return this.gameName;
     }
 
     public ColorModel[][] getFichas() {
@@ -187,7 +188,19 @@ public class GameViewBean extends ViewBean {
     }
 
     public String saveGame() {
-        return "save";
+        String result = null;
+        if (this.isGameNamed()) {
+            SaveGameController saveGameController = this.getControllerFactory()
+                    .getSaveGameController();
+            saveGameController.saveGame();
+            this.savedGame = true;
+            LogManager.getLogger(saveGameController.getClass().getName()).info(
+                    "Partida salvada: " + this.gameName);
+
+        } else {
+            result = "save";
+        }
+        return result;
     }
 
     public String openGame() {

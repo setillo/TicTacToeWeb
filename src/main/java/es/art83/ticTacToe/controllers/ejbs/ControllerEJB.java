@@ -2,14 +2,14 @@ package es.art83.ticTacToe.controllers.ejbs;
 
 public class ControllerEJB {
 
-    private TicTacToeApplicationManager ticTacToeStatesManager;
+    private TicTacToeContext ticTacToeContext;
 
-    public ControllerEJB(TicTacToeApplicationManager ticTacToeStatesManager) {
-        this.ticTacToeStatesManager = ticTacToeStatesManager;
+    public ControllerEJB(TicTacToeContext ticTacToeContext) {
+        this.ticTacToeContext = ticTacToeContext;
     }
 
-    protected TicTacToeApplicationManager getTicTacToeStatesManager() {
-        return ticTacToeStatesManager;
+    protected TicTacToeContext getTicTacToeContext() {
+        return ticTacToeContext;
     }
 
 }
