@@ -26,11 +26,11 @@ public class GameEntity {
     }
 
     public GameEntity(PlayerEntity playerEntity) {
-        this(null, playerEntity, null, null);
+        this(null, playerEntity);
     }
 
     public GameEntity() {
-        this(null, null, null, null);
+        this(null, null);
     }
 
     public String getName() {
