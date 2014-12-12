@@ -3,12 +3,27 @@ package es.art83.ticTacToe.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import es.art83.ticTacToe.models.utils.DirectionModel;
 
+@Entity
 public class CoordinateEntity {
     public static final int MIN = 0;
 
     public static final int MAX = 2;
+    
+    @Id
+    @GeneratedValue
+    private int id;
+    @OneToOne
+    @JoinColumn
+    private PieceEntity piece;
+
 
     private int row, column;
 

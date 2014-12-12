@@ -6,6 +6,12 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>spike.Entidad</class>
+		<class>es.art83.ticTacToe.models.entities.BoardEntity</class>
+		<class>es.art83.ticTacToe.models.entities.CoordinateEntity</class>
+		<class>es.art83.ticTacToe.models.entities.GameEntity</class>
+		<class>es.art83.ticTacToe.models.entities.PieceEntity</class>
+		<class>es.art83.ticTacToe.models.entities.TurnEntity</class>
+		<class>es.art83.ticTacToe.models.entities.PlayerEntity</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tictactoe" />

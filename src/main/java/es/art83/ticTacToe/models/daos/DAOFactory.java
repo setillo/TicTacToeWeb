@@ -1,6 +1,6 @@
 package es.art83.ticTacToe.models.daos;
 
-import es.art83.ticTacToe.models.daos.memory.DAOMemoryFactory;
+import es.art83.ticTacToe.models.daos.jpa.DAOJPAFactory;
 
 public abstract class DAOFactory {
     public static DAOFactory factory = null;
@@ -11,7 +11,7 @@ public abstract class DAOFactory {
 
     public static DAOFactory getFactory() {
         if (factory == null) {
-            factory = new DAOMemoryFactory();
+            factory = new DAOJPAFactory();
         }
         return factory;
     }

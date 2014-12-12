@@ -1,7 +1,20 @@
 package es.art83.ticTacToe.models.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class PlayerEntity {
+    @Id
     private String user;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private List<GameEntity> games;
+
 
     private String password;
     

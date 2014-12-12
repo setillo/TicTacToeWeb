@@ -2,15 +2,31 @@ package es.art83.ticTacToe.models.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import es.art83.ticTacToe.models.utils.ColorModel;
 
+@Entity
 public class GameEntity {
+    @Id
+    @GeneratedValue
+    private int id;
+    
     private String name;
 
+    @OneToOne
+    @JoinColumn
     private PlayerEntity player;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "game")
     private TurnEntity turn;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "game")
     private BoardEntity board;
 
     public GameEntity(String name, PlayerEntity playerEntity, BoardEntity boardClone,

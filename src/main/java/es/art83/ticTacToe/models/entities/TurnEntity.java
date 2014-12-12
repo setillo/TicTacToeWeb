@@ -1,8 +1,22 @@
 package es.art83.ticTacToe.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import es.art83.ticTacToe.models.utils.ColorModel;
 
+@Entity
 public class TurnEntity {
+    @Id
+    @GeneratedValue
+    private int id;
+    @OneToOne
+    @JoinColumn
+    private GameEntity game;
+
     private ColorModel color;
 
     public TurnEntity(ColorModel color) {
