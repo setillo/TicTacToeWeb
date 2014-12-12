@@ -22,6 +22,7 @@ public class BoardEntity {
     @Id
     @GeneratedValue
     private int id;
+    
     @OneToOne
     @JoinColumn
     private GameEntity game;

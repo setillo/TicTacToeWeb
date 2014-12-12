@@ -3,6 +3,7 @@ package es.art83.ticTacToe.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,12 +21,16 @@ public class CoordinateEntity {
     @Id
     @GeneratedValue
     private int id;
+    
+
     @OneToOne
     @JoinColumn
     private PieceEntity piece;
 
 
-    private int row, column;
+    private int row;
+    @Column(name = "colum")    //Colisiona con SQL
+    private int column;
 
     public CoordinateEntity(int row, int column) {
         this.setRow(row);

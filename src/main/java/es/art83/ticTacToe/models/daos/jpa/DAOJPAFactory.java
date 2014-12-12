@@ -17,23 +17,21 @@ public class DAOJPAFactory extends DAOFactory {
     }
 
     public EntityManager getEm() {
-        if (!em.isOpen())
+        if (!em.isOpen()) {
             this.em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT)
                     .createEntityManager();
+        }
         return em;
     }
 
     @Override
     public PlayerDAO getPlayerDAO() {
-        // TODO Auto-generated method stub
-        return null;
+        return new PlayerDAOJPA();
     }
 
     @Override
     public GameDAO getGameDAO() {
-        // TODO Auto-generated method stub
-        return null;
+        return new GameDAOJPA();
     }
-
 
 }

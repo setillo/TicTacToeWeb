@@ -6,7 +6,7 @@ import es.art83.ticTacToe.models.entities.PlayerEntity;
 public class PlayerDAOJPA extends TransactionGenericDAOJPA<PlayerEntity, String> implements
         PlayerDAO {
 
-    public PlayerDAOJPA(Class<PlayerEntity> persistentClass) {
+    public PlayerDAOJPA() {
         super(PlayerEntity.class);
     }
 

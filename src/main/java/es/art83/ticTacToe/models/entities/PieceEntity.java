@@ -15,6 +15,7 @@ public class PieceEntity {
     @Id
     @GeneratedValue
     private int id;
+    
     @OneToOne
     @JoinColumn
     private BoardEntity board;
