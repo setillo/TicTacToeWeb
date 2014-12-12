@@ -18,50 +18,50 @@ import es.art83.ticTacToe.models.daos.TransactionGenericDAO;
 public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T, ID> {
     private Class<T> persistentClass;
 
-    protected EntityManager em;
+    protected EntityManager entityManager;
 
     public TransactionGenericDAOJPA(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
-        this.em = ((DAOJPAFactory) DAOJPAFactory.getFactory()).getEm();
+        this.entityManager = ((DAOJPAFactory) DAOJPAFactory.getFactory()).getEm();
     }
 
     @Override
     public void create(T entity) {
         LogManager.getLogger(TransactionGenericDAOJPA.class).info("create: " + entity);
-        if (em.getTransaction().isActive())
-            em.persist(entity);
+        if (entityManager.getTransaction().isActive())
+            entityManager.persist(entity);
         else {
-            em.getTransaction().begin();
+            entityManager.getTransaction().begin();
             try {
-                em.persist(entity);
-                em.getTransaction().commit();
+                entityManager.persist(entity);
+                entityManager.getTransaction().commit();
             } catch (Exception e) {
                 LogManager.getLogger(TransactionGenericDAOJPA.class).error("create: " + e);
-                if (em.getTransaction().isActive())
-                    em.getTransaction().rollback();
+                if (entityManager.getTransaction().isActive())
+                    entityManager.getTransaction().rollback();
             }
         }
     }
 
     @Override
     public T read(ID id) {
-        return em.find(persistentClass, id);
+        return entityManager.find(persistentClass, id);
     }
 
     @Override
     public void update(T entity) {
         LogManager.getLogger(TransactionGenericDAOJPA.class).info("update: " + entity);
-        if (em.getTransaction().isActive())
-            em.merge(entity);
+        if (entityManager.getTransaction().isActive())
+            entityManager.merge(entity);
         else {
-            em.getTransaction().begin();
+            entityManager.getTransaction().begin();
             try {
-                em.merge(entity);
-                em.getTransaction().commit();
+                entityManager.merge(entity);
+                entityManager.getTransaction().commit();
             } catch (Exception e) {
                 LogManager.getLogger(TransactionGenericDAOJPA.class).error("update: " + e);
-                if (em.getTransaction().isActive())
-                    em.getTransaction().rollback();
+                if (entityManager.getTransaction().isActive())
+                    entityManager.getTransaction().rollback();
             }
         }
     }
@@ -70,17 +70,17 @@ public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T,
     @Override
     public void delete(T entity) {
         LogManager.getLogger(TransactionGenericDAOJPA.class).info("delete: " + entity);
-        if (em.getTransaction().isActive())
-            em.remove(entity);
+        if (entityManager.getTransaction().isActive())
+            entityManager.remove(entity);
         else {
-            em.getTransaction().begin();
+            entityManager.getTransaction().begin();
             try {
-                em.remove(entity);
-                em.getTransaction().commit();
+                entityManager.remove(entity);
+                entityManager.getTransaction().commit();
             } catch (Exception e) {
                 LogManager.getLogger(TransactionGenericDAOJPA.class).error("delete: " + e);
-                if (em.getTransaction().isActive())
-                    em.getTransaction().rollback();
+                if (entityManager.getTransaction().isActive())
+                    entityManager.getTransaction().rollback();
             }
         }
     }
@@ -96,7 +96,7 @@ public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T,
     @Override
     public List<T> find(String[] attributes, String[] values, String order, int index, int size) {
         // Se crea un criterio de consulta
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.persistentClass);
 
         // Se establece la clausula FROM
@@ -124,13 +124,13 @@ public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T,
 
         // Se crea el resultado
         if (index >= 0 && size > 0) {
-            TypedQuery<T> tq = em.createQuery(criteriaQuery);
+            TypedQuery<T> tq = entityManager.createQuery(criteriaQuery);
             tq.setFirstResult(index);
             tq.setMaxResults(size); // Se realiza la query
             return tq.getResultList();
         } else {
             // Se realiza la query
-            Query query = em.createQuery(criteriaQuery);
+            Query query = entityManager.createQuery(criteriaQuery);
             return query.getResultList();
         }
     }
@@ -143,7 +143,7 @@ public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T,
     @Override
     public List<T> findAll() {
         // Se crea un criterio de consulta
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.persistentClass);
 
         // Se establece la clausula FROM
@@ -155,7 +155,7 @@ public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T,
         // No existen predicados
 
         // Se realiza la query
-        TypedQuery<T> tq = em.createQuery(criteriaQuery);
+        TypedQuery<T> tq = entityManager.createQuery(criteriaQuery);
         tq.setFirstResult(0); // El primero es 0
         tq.setMaxResults(0); // Se realiza la query, se buscan todos
         return tq.getResultList();
@@ -166,20 +166,20 @@ public class TransactionGenericDAOJPA<T, ID> implements TransactionGenericDAO<T,
 
     @Override
     public void begin() {
-        if (!em.getTransaction().isActive())
-            em.getTransaction().begin();
+        if (!entityManager.getTransaction().isActive())
+            entityManager.getTransaction().begin();
     }
 
     @Override
     public void commit() {
-        if (em.getTransaction().isActive())
-            em.getTransaction().commit();
+        if (entityManager.getTransaction().isActive())
+            entityManager.getTransaction().commit();
     }
 
     @Override
     public void rollback() {
-        if (em.getTransaction().isActive())
-            em.getTransaction().rollback();
+        if (entityManager.getTransaction().isActive())
+            entityManager.getTransaction().rollback();
     }
 
 }

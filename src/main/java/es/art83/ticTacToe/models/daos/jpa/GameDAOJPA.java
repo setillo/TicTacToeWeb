@@ -21,7 +21,7 @@ public class GameDAOJPA extends TransactionGenericDAOJPA<GameEntity, Integer> im
     @Override
     public List<String> findPlayerGameNames(PlayerEntity player) {
         // Se crea un criterio de consulta
-        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<String> query = builder.createQuery(String.class);
         // Se establece la clausula FROM
         Root<GameEntity> root = query.from(GameEntity.class);
@@ -32,7 +32,7 @@ public class GameDAOJPA extends TransactionGenericDAOJPA<GameEntity, Integer> im
         // Se establece el WHERE
         query.where(predicate);
         // Se crea el resultado
-        TypedQuery<String> tq = em.createQuery(query);
+        TypedQuery<String> tq = entityManager.createQuery(query);
         tq.setFirstResult(0);
         tq.setMaxResults(0); // Se buscan todos
         return tq.getResultList();
@@ -41,7 +41,7 @@ public class GameDAOJPA extends TransactionGenericDAOJPA<GameEntity, Integer> im
     @Override
     public GameEntity findGame(PlayerEntity player, String gameName) {
         // Se crea un criterio de consulta
-        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<GameEntity> query = builder.createQuery(GameEntity.class);
         // Se establece la clausula FROM
         Root<GameEntity> root = query.from(GameEntity.class);
@@ -54,7 +54,7 @@ public class GameDAOJPA extends TransactionGenericDAOJPA<GameEntity, Integer> im
         // Se establece el WHERE
         query.where(predicate);
         // Se crea el resultado
-        TypedQuery<GameEntity> tq = em.createQuery(query);
+        TypedQuery<GameEntity> tq = entityManager.createQuery(query);
         return tq.getSingleResult();
     }
 
