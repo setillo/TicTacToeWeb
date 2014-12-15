@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.art83.ticTacToe.controllers.ControllerFactory;
-import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
 @WebFilter("/logged/*")
 public class AuthenticationPlayer implements Filter {
@@ -22,9 +21,7 @@ public class AuthenticationPlayer implements Filter {
             throws IOException, ServletException {
         ControllerFactory controllerFactory = (ControllerFactory) ((HttpServletRequest) request)
                 .getSession().getAttribute("controllerFactory");
-        TicTacToeStateModel ticTacToeStateModel = controllerFactory.getTicTacToeApplicationModel();
-        if (ticTacToeStateModel == TicTacToeStateModel.INITIAL
-                || ticTacToeStateModel == TicTacToeStateModel.FINAL) {
+        if (!controllerFactory.getLoginController().logged()) {
             ((HttpServletResponse) response).sendRedirect("../login.xhtml");
         } else {
             chain.doFilter(request, response);

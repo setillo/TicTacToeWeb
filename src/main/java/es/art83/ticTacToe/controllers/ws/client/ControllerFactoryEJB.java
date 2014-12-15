@@ -1,7 +1,4 @@
-package es.art83.ticTacToe.controllers.ejbs;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+package es.art83.ticTacToe.controllers.ws.client;
 
 import es.art83.ticTacToe.controllers.ControllerFactory;
 import es.art83.ticTacToe.controllers.CreateGameController;
@@ -14,11 +11,11 @@ import es.art83.ticTacToe.controllers.SaveGameController;
 import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.controllers.StartGameController;
 
-@ManagedBean(name = "controllerFactory")
-@SessionScoped
 public class ControllerFactoryEJB extends ControllerFactory {
 
-    private TicTacToeContext ticTacToeContext;
+    private WSClientContext wSClientContext;
+
+    private WebService webService;
 
     private LoginController loginController;
 
@@ -38,17 +35,19 @@ public class ControllerFactoryEJB extends ControllerFactory {
 
     private SaveGameController saveGameController;
 
+
     public ControllerFactoryEJB() {
-        this.ticTacToeContext = new TicTacToeContext();
-        this.loginController = new LoginControllerEJB(ticTacToeContext);
-        this.logoutController = new LogoutControllerEJB(ticTacToeContext);
-        this.startGameController = new StartGameControllerEJB(ticTacToeContext);
-        this.createGameController = new CreateGameControllerEJB(ticTacToeContext);
-        this.nameGameController = new NameGameControllerEJB(ticTacToeContext);
-        this.showGameController = new ShowGameControllerEJB(ticTacToeContext);
-        this.placeCardController = new PlaceCardControllerEJB(ticTacToeContext);
-        this.saveGameController = new SaveGameControllerEJB(ticTacToeContext);
-        this.openGameController = new OpenGameControllerEJB(ticTacToeContext);
+        this.wSClientContext = new WSClientContext();
+        this.webService = new WebService();
+        this.loginController = new LoginControllerWSClient(webService, wSClientContext);
+        this.logoutController = new LogoutControllerWSClient(webService, wSClientContext);
+        this.startGameController = null;
+        this.createGameController = null;
+        this.nameGameController = null;
+        this.showGameController = null;
+        this.placeCardController = null;
+        this.saveGameController = null;
+        this.openGameController = null;
     }
 
     @Override

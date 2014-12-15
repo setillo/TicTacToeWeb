@@ -7,5 +7,7 @@ public interface LoginController {
     boolean login(PlayerEntity user);
 
     boolean register(PlayerEntity user);
+    
+    boolean logged();
 
 }

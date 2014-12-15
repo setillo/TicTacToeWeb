@@ -41,4 +41,10 @@ public class LoginControllerEJB extends ControllerEJB implements LoginController
         return result;
     }
 
+    @Override
+    public boolean logged() {
+       return this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.INITIAL
+                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
+    }
+
 }
