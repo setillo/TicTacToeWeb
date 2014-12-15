@@ -1,7 +1,6 @@
 package es.art83.ticTacToe.controllers.ws.client;
 
 public class ControllerWSClient {
-    protected static final String URI = "http://localhost:8080/TicTacToe/rest";
     private WebService webService;
     private WSClientContext wSClientContext;
     

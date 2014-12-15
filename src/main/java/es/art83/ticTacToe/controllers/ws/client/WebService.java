@@ -22,8 +22,7 @@ public class WebService {
 
     public Boolean post(String path, Object param) {
         Client client = Client.create(new DefaultClientConfig());
-        WebResource webResource = client.resource(UriBuilder.fromUri(ControllerWSClient.URI)
-                .build());
+        WebResource webResource = client.resource(UriBuilder.fromUri(URI).build());
         webResource = webResource.path(path);
         ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(
                 ClientResponse.class, param);
@@ -45,15 +44,14 @@ public class WebService {
         return (Class<?>) response.get(clazz);
     }
 
-    public int delete(String path) {
+    public boolean delete(String path) {
         Client client = Client.create(new DefaultClientConfig());
-        WebResource webResource = client.resource(UriBuilder.fromUri(ControllerWSClient.URI)
-                .build());
+        WebResource webResource = client.resource(UriBuilder.fromUri(URI).build());
         webResource = webResource.path(path); // para añadir path
 
         int response = webResource.delete(ClientResponse.class).getStatus();
         LogManager.getLogger(LoginControllerWSClient.class).info("DELETE/" + response);
-        return response;
+        return response == 201;
     }
 
 }
