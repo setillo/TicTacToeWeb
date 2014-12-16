@@ -1,15 +1,18 @@
 package es.art83.ticTacToe.controllers.ws.client;
 
+import java.util.List;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.Response;
 
 import org.apache.logging.log4j.LogManager;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.WebResource.Builder;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 public class WebService {
     private static final String URI = "http://localhost:8080/TicTacToe/rest";
@@ -20,38 +23,96 @@ public class WebService {
         this.token = token;
     }
 
-    public Boolean post(String path, Object param) {
-        Client client = Client.create(new DefaultClientConfig());
-        WebResource webResource = client.resource(UriBuilder.fromUri(URI).build());
-        webResource = webResource.path(path);
-        ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(
-                ClientResponse.class, param);
+    public boolean post(String resource, Object entity) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target(URI);
+        webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
+
+        if (this.token != null) {
+            webTarget = webTarget.queryParam("token", this.token);
+        }
+        
+        Response response = webTarget.request().post(Entity.json(entity));
+
         LogManager.getLogger(LoginControllerWSClient.class).info("POST/" + response.getStatus());
-        return response.getStatus() == 201;
+        
+        boolean result = response.getStatus() == 201;
+
+        client.close();
+        return result;
     }
 
-    public Object get(String path, Class<?> clazz) {
-        Client client = Client.create(new DefaultClientConfig());
+    public Object get(String resource, Class<?> ResponseClass) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target(URI);
+        webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
 
-        WebResource webResource = client.resource(UriBuilder.fromUri(URI).build());
-        webResource = webResource.path(path); // para añadir path
-        webResource = webResource.queryParam("token", this.token); // añade
-                                                                   // parámetros
+        if (this.token != null) {
+            webTarget = webTarget.queryParam("token", this.token);
+        }
 
-        Builder response = webResource.accept(MediaType.APPLICATION_JSON);
+        Invocation.Builder invocation = webTarget.request(MediaType.APPLICATION_JSON);
+        
+        Object result = invocation.get(ResponseClass);
+        
         LogManager.getLogger(LoginControllerWSClient.class).info(
-                "GET/" + response.head().getStatus());
-        return (Class<?>) response.get(clazz);
+                "GET/" + result);
+        
+        client.close();
+        return result;
     }
 
-    public boolean delete(String path) {
-        Client client = Client.create(new DefaultClientConfig());
-        WebResource webResource = client.resource(UriBuilder.fromUri(URI).build());
-        webResource = webResource.path(path); // para añadir path
+    public List<?> gets(String resource) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target(URI);
+        webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
 
-        int response = webResource.delete(ClientResponse.class).getStatus();
-        LogManager.getLogger(LoginControllerWSClient.class).info("DELETE/" + response);
-        return response == 201;
+        if (this.token != null) {
+            webTarget = webTarget.queryParam("token", this.token);
+        }
+
+        Invocation.Builder invocation = webTarget.request(MediaType.APPLICATION_JSON);
+        
+        List<?> result = invocation.get(new GenericType<List<?>>() {});
+        
+        LogManager.getLogger(LoginControllerWSClient.class).info(
+                "GET/" + result);
+        
+        client.close();
+        return result;
+    }
+
+    public void delete(String resource) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target(URI);
+        webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
+
+        if (this.token != null) {
+            webTarget = webTarget.queryParam("token", this.token);
+        }
+        
+        Response response = webTarget.request().delete();
+
+        LogManager.getLogger(LoginControllerWSClient.class).info("DELETE/" + response.getStatus());
+    }
+
+    public Boolean put(String resource, Object entity) {
+        Client client = ClientBuilder.newClient();
+        WebTarget webTarget = client.target(URI);
+        webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
+
+        if (this.token != null) {
+            webTarget = webTarget.queryParam("token", this.token);
+        }
+        
+        Response response = webTarget.request().put(Entity.json(entity));
+
+        LogManager.getLogger(LoginControllerWSClient.class).info("POST/" + response.getStatus());
+        
+        boolean result = response.getStatus() == 201;
+
+        client.close();
+        return result;
     }
 
 }

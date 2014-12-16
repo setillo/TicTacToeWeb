@@ -10,9 +10,9 @@ public class LoginControllerWSClient extends ControllerWSClient implements Login
     }
 
     @Override
-    public boolean login(PlayerEntity user) {
+    public boolean login(PlayerEntity playerEntity) {
         final String PATH = "token";
-        return this.getWebService().post(PATH, user);
+        return this.getWebService().post(PATH, playerEntity);
     }
 
     @Override

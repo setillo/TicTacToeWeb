@@ -1,5 +1,8 @@
 package es.art83.ticTacToe.controllers.ws.client;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import es.art83.ticTacToe.controllers.ControllerFactory;
 import es.art83.ticTacToe.controllers.CreateGameController;
 import es.art83.ticTacToe.controllers.LoginController;
@@ -11,6 +14,8 @@ import es.art83.ticTacToe.controllers.SaveGameController;
 import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.controllers.StartGameController;
 
+@ManagedBean(name = "controllerFactoryWSClient")
+@SessionScoped
 public class ControllerFactoryWSClient extends ControllerFactory {
 
     private WSClientContext wSClientContext;
