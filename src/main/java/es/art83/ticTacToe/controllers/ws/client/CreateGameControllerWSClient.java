@@ -12,7 +12,7 @@ public class CreateGameControllerWSClient extends ControllerWSClient implements
     @Override
     public void createGame() {
         final String PATH = "game";
-        this.getWebService().post(PATH, null);
+        this.getWebService().create(PATH, null);
     }
 
 }

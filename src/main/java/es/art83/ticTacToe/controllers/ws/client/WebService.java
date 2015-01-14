@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.logging.log4j.LogManager;
 
-
 public class WebService {
     private static final String URI = "http://localhost:8080/TicTacToe/rest";
 
@@ -23,7 +22,7 @@ public class WebService {
         this.token = token;
     }
 
-    public boolean post(String resource, Object entity) {
+    public Object create(String resource, Object entity) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(URI);
         webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
@@ -31,18 +30,20 @@ public class WebService {
         if (this.token != null) {
             webTarget = webTarget.queryParam("token", this.token);
         }
-        
-        Response response = webTarget.request().post(Entity.json(entity));
 
-        LogManager.getLogger(LoginControllerWSClient.class).info("POST/" + response.getStatus());
-        
+        Response response = webTarget.request().post(Entity.json(entity));
+        Object result response.getEntity();
+
+        LogManager.getLogger(LoginControllerWSClient.class).info("POST/" + response.getStatus()+);
+        response.getEntity();
+
         boolean result = response.getStatus() == 201;
 
         client.close();
         return result;
     }
 
-    public Object get(String resource, Class<?> ResponseClass) {
+    public Object read(String resource, Class<?> ResponseClass) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(URI);
         webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
@@ -52,17 +53,16 @@ public class WebService {
         }
 
         Invocation.Builder invocation = webTarget.request(MediaType.APPLICATION_JSON);
-        
+
         Object result = invocation.get(ResponseClass);
-        
-        LogManager.getLogger(LoginControllerWSClient.class).info(
-                "GET/" + result);
-        
+
+        LogManager.getLogger(LoginControllerWSClient.class).info("GET/" + result);
+
         client.close();
         return result;
     }
 
-    public List<?> gets(String resource) {
+    public List<?> readCollection(String resource) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(URI);
         webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
@@ -72,12 +72,12 @@ public class WebService {
         }
 
         Invocation.Builder invocation = webTarget.request(MediaType.APPLICATION_JSON);
-        
-        List<?> result = invocation.get(new GenericType<List<?>>() {});
-        
-        LogManager.getLogger(LoginControllerWSClient.class).info(
-                "GET/" + result);
-        
+
+        List<?> result = invocation.get(new GenericType<List<?>>() {
+        });
+
+        LogManager.getLogger(LoginControllerWSClient.class).info("GET/" + result);
+
         client.close();
         return result;
     }
@@ -90,13 +90,13 @@ public class WebService {
         if (this.token != null) {
             webTarget = webTarget.queryParam("token", this.token);
         }
-        
+
         Response response = webTarget.request().delete();
 
         LogManager.getLogger(LoginControllerWSClient.class).info("DELETE/" + response.getStatus());
     }
 
-    public Boolean put(String resource, Object entity) {
+    public Boolean update(String resource, Object entity) {
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(URI);
         webTarget = webTarget.path("{resource}").resolveTemplate("resource", resource);
@@ -104,11 +104,11 @@ public class WebService {
         if (this.token != null) {
             webTarget = webTarget.queryParam("token", this.token);
         }
-        
+
         Response response = webTarget.request().put(Entity.json(entity));
 
         LogManager.getLogger(LoginControllerWSClient.class).info("POST/" + response.getStatus());
-        
+
         boolean result = response.getStatus() == 201;
 
         client.close();

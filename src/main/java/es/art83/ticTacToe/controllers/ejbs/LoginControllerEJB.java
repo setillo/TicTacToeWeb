@@ -19,11 +19,11 @@ public class LoginControllerEJB extends ControllerEJB implements LoginController
     }
 
     @Override
-    public boolean login(PlayerEntity player) {
+    public boolean login(PlayerEntity playerEntity) {
         boolean result = false;
-        PlayerEntity playerBD = DAOFactory.getFactory().getPlayerDAO().read(player.getUser());
-        if (playerBD != null && playerBD.getPassword().equals(player.getPassword())) {
-            this.changeSate(playerBD);
+        PlayerEntity playerEntityBD = DAOFactory.getFactory().getPlayerDAO().read(playerEntity.getUser());
+        if (playerEntityBD != null && playerEntityBD.getPassword().equals(playerEntity.getPassword())) {
+            this.changeSate(playerEntityBD);
             result = true;
         }
         return result;
@@ -43,8 +43,8 @@ public class LoginControllerEJB extends ControllerEJB implements LoginController
 
     @Override
     public boolean logged() {
-       return this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.INITIAL
-                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.FINAL;
+       return this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME
+                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
     }
 
 }

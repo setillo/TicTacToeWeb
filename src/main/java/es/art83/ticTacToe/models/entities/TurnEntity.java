@@ -13,11 +13,12 @@ public class TurnEntity {
     @Id
     @GeneratedValue
     private int id;
+
+    private ColorModel color;
+
     @OneToOne
     @JoinColumn
     private GameEntity game;
-
-    private ColorModel color;
 
     public TurnEntity(ColorModel color) {
         this.setColor(color);
@@ -31,16 +32,25 @@ public class TurnEntity {
         return color;
     }
 
+    public void setColor(ColorModel color) {
+        this.color = color;
+    }
+
+    // JPA
+    public GameEntity getGame() {
+        return game;
+    }
+
+    public void setGame(GameEntity game) {
+        this.game = game;
+    }
+
     public ColorModel getColorChanged() {
         if (this.color == ColorModel.X) {
             return ColorModel.O;
         } else {
             return ColorModel.X;
         }
-    }
-
-    public void setColor(ColorModel color) {
-        this.color = color;
     }
 
     public void change() {
@@ -54,7 +64,7 @@ public class TurnEntity {
     public void update(TurnEntity turn) {
         this.setColor(turn.color);
     }
-   
+
     @Override
     public String toString() {
         return "TurnEntity[" + color + "]";

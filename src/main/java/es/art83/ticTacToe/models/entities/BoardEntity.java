@@ -23,13 +23,14 @@ public class BoardEntity {
     @GeneratedValue
     private int id;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "board")
+    private List<PieceEntity> pieces;
+    
     @OneToOne
     @JoinColumn
     private GameEntity game;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "board")
-    private List<PieceEntity> pieces;
 
     public BoardEntity() {
         this(new ArrayList<>());
@@ -46,6 +47,16 @@ public class BoardEntity {
     public void setPieces(List<PieceEntity> pieces) {
         this.pieces = pieces;
     }
+    
+    //JPA
+    public GameEntity getGame() {
+        return this.game;
+    }
+
+    public void setGame(GameEntity game) {
+        this.game = game;
+    }
+    
 
     public List<CoordinateEntity> validDestinationCoordinates() {
         List<CoordinateEntity> coordinates = CoordinateEntity.allCoordinates();
@@ -54,6 +65,7 @@ public class BoardEntity {
         }
         return coordinates;
     }
+
 
     public List<CoordinateEntity> coordinatesColor(ColorModel color) {
         List<CoordinateEntity> coordenadas = new ArrayList<>();

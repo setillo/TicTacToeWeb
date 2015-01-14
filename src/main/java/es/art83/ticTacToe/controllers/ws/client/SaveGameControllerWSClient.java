@@ -11,7 +11,7 @@ public class SaveGameControllerWSClient extends ControllerWSClient implements Sa
 
     @Override
     public void saveGame(String gameName) {
-        this.getWebService().post(PATH, gameName);
+        this.getWebService().create(PATH, gameName);
     }
 
     @Override

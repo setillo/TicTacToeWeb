@@ -17,20 +17,20 @@ public class CoordinateEntity {
     public static final int MIN = 0;
 
     public static final int MAX = 2;
-    
+
     @Id
     @GeneratedValue
     private int id;
-    
+
+    private int row;
+
+    @Column(name = "colum")
+    // Colisiona con SQL
+    private int column;
 
     @OneToOne
     @JoinColumn
     private PieceEntity piece;
-
-
-    private int row;
-    @Column(name = "colum")    //Colisiona con SQL
-    private int column;
 
     public CoordinateEntity(int row, int column) {
         this.setRow(row);
@@ -61,6 +61,15 @@ public class CoordinateEntity {
 
     public void setColumn(int column) {
         this.column = column;
+    }
+
+    //JPA
+    public PieceEntity getPiece() {
+        return piece;
+    }
+
+    public void setPiece(PieceEntity piece) {
+        this.piece = piece;
     }
 
     public static List<CoordinateEntity> allCoordinates() {
@@ -115,7 +124,7 @@ public class CoordinateEntity {
 
     @Override
     public String toString() {
-        return row + "-" + column ;
+        return row + "-" + column;
     }
 
 }

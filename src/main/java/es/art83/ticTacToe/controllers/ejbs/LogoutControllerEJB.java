@@ -16,7 +16,7 @@ public class LogoutControllerEJB extends ControllerEJB implements LogoutControll
     @Override
     public void logout() {
         assert this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME
-                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.CLOSED_GAME;
+                || this.getTicTacToeContext().getTicTacToeStateModel() == TicTacToeStateModel.OPENED_GAME;
         this.getTicTacToeContext().setPlayer(null);
         this.getTicTacToeContext().setGame(null);
         this.getTicTacToeContext().setSaved(true);

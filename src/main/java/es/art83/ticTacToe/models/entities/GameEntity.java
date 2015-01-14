@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import es.art83.ticTacToe.models.utils.ColorModel;
@@ -19,15 +20,15 @@ public class GameEntity {
     
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     private PlayerEntity player;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "game")
-    private TurnEntity turn;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "game")
     private BoardEntity board;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "game")
+    private TurnEntity turn;
 
     public GameEntity(String name, PlayerEntity playerEntity, BoardEntity boardClone,
             TurnEntity turnClone) {

@@ -11,13 +11,12 @@ import javax.persistence.OneToMany;
 public class PlayerEntity {
     @Id
     private String user;
-    
+
+    private String password;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private List<GameEntity> games;
 
-
-    private String password;
-    
     public PlayerEntity(String user, String password) {
         this.user = user;
         this.password = password;
@@ -43,11 +42,11 @@ public class PlayerEntity {
         this.password = password;
     }
 
-    public void update(PlayerEntity player){
+    public void update(PlayerEntity player) {
         this.setUser(player.user);
         this.setPassword(player.password);
     }
-    
+
     @Override
     public String toString() {
         return "User[" + user + ":" + password + "]";
@@ -67,7 +66,7 @@ public class PlayerEntity {
 
     @Override
     public PlayerEntity clone() {
-        return new PlayerEntity(this.user,this.password);
+        return new PlayerEntity(this.user, this.password);
     }
 
 }

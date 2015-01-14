@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+
 import es.art83.ticTacToe.controllers.ControllerFactory;
 
 @WebFilter("/logged/*")
@@ -22,6 +24,7 @@ public class AuthenticationPlayer implements Filter {
         ControllerFactory controllerFactory = (ControllerFactory) ((HttpServletRequest) request)
                 .getSession().getAttribute("controllerFactory");
         if (!controllerFactory.getLoginController().logged()) {
+            LogManager.getLogger(this.getClass().getName()).info("Usuario no autorizado, reenviado a login...");
             ((HttpServletResponse) response).sendRedirect("../login.xhtml");
         } else {
             chain.doFilter(request, response);

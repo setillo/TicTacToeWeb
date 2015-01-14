@@ -16,15 +16,14 @@ public class PieceEntity {
     @GeneratedValue
     private int id;
     
+    private ColorModel color;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "piece")
+    private CoordinateEntity coordinate;
+    
     @OneToOne
     @JoinColumn
     private BoardEntity board;
-
-
-    private ColorModel color;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "piece")
-    private CoordinateEntity coordinate;
 
     public PieceEntity(ColorModel color, CoordinateEntity coordinate) {
         this.setColor(color);
@@ -49,6 +48,15 @@ public class PieceEntity {
 
     public void setCoordinate(CoordinateEntity coordinate) {
         this.coordinate = coordinate;
+    }
+
+    //JPA
+    public BoardEntity getBoard() {
+        return board;
+    }
+
+    public void setBoard(BoardEntity board) {
+        this.board = board;
     }
 
     @Override

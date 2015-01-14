@@ -2,8 +2,7 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="tictactoe"
-		transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="tictactoe" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>spike.Entidad</class>
 		<class>es.art83.ticTacToe.models.entities.BoardEntity</class>
@@ -13,7 +12,7 @@
 		<class>es.art83.ticTacToe.models.entities.PlayerEntity</class>
 		<class>es.art83.ticTacToe.models.entities.CoordinateEntity</class>
 		<properties>
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+			<property name="eclipselink.ddl-generation" value="none" /> <!--drop-and-create-tables   none-->
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tictactoe" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />

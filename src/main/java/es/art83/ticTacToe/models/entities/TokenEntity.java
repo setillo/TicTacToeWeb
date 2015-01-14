@@ -1,4 +1,4 @@
-package es.art83.ticTacToe.controllers.ws.client;
+package es.art83.ticTacToe.models.entities;
 
 public class TokenEntity {
 
