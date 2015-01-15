@@ -5,6 +5,6 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <property name="java-output-path" value="/TicTacToe/build/classes"/>
-        <property name="context-root" value="TacTacToeWeb"/>
+        <property name="context-root" value="TicTacToe"/>
     </wb-module>
 </project-modules>

@@ -6,8 +6,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 public class PlayerEntity {
     @Id
     private String user;
@@ -68,5 +70,6 @@ public class PlayerEntity {
     public PlayerEntity clone() {
         return new PlayerEntity(this.user, this.password);
     }
+
 
 }

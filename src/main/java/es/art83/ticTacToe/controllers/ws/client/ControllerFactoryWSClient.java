@@ -2,6 +2,9 @@ package es.art83.ticTacToe.controllers.ws.client;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 import es.art83.ticTacToe.controllers.ControllerFactory;
 import es.art83.ticTacToe.controllers.CreateGameController;
@@ -14,13 +17,9 @@ import es.art83.ticTacToe.controllers.SaveGameController;
 import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.controllers.StartGameController;
 
-@ManagedBean(name = "controllerFactoryWSClient")
+@ManagedBean(name = "controllerFactory")
 @SessionScoped
 public class ControllerFactoryWSClient extends ControllerFactory {
-
-    private WSClientContext wSClientContext;
-
-    private WebService webService;
 
     private LoginController loginController;
 
@@ -40,19 +39,24 @@ public class ControllerFactoryWSClient extends ControllerFactory {
 
     private SaveGameController saveGameController;
 
-
     public ControllerFactoryWSClient() {
-        this.wSClientContext = new WSClientContext();
-        this.webService = new WebService();
-        this.loginController = new LoginControllerWSClient(webService, wSClientContext);
-        this.logoutController = new LogoutControllerWSClient(webService, wSClientContext);
-        this.startGameController = null;
-        this.createGameController = null;
-        this.nameGameController = null;
-        this.showGameController = null;
-        this.placeCardController = null;
-        this.saveGameController = null;
-        this.openGameController = null;
+        Integer contextId = null;
+        // Crear peticion rest para crear contexto. Almacenar la referencia del
+        // contexto en el servidor
+        WebTarget target = ControllerWSClient.webTargetServer().path("contexts");
+        Response response = target.request().post(Entity.xml(null));
+        contextId = response.readEntity(Integer.class);
+
+        // Pasarle la referencia a todos los controladores
+        this.loginController = new LoginControllerWSClient(contextId);
+        this.logoutController = new LogoutControllerWSClient(contextId);
+        this.startGameController = new StartControllerWSClient(contextId);
+        this.createGameController = new CreateControllerWSClient(contextId);
+        this.nameGameController = new NameControllerWSClient(contextId);
+        this.showGameController = new ShowControllerWSClient(contextId);
+        this.placeCardController = new PlaceControllerWSClient(contextId);
+        this.saveGameController = new SaveControllerWSClient(contextId);
+        this.openGameController = new OpenControllerWSClient(contextId);
     }
 
     @Override

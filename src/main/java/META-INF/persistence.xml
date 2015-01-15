@@ -11,6 +11,7 @@
 		<class>es.art83.ticTacToe.models.entities.TurnEntity</class>
 		<class>es.art83.ticTacToe.models.entities.PlayerEntity</class>
 		<class>es.art83.ticTacToe.models.entities.CoordinateEntity</class>
+		<class>es.art83.ticTacToe.models.entities.ContextEntity</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="none" /> <!--drop-and-create-tables   none-->
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tictactoe" />

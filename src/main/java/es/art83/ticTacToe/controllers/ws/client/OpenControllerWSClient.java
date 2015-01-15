@@ -2,10 +2,10 @@ package es.art83.ticTacToe.controllers.ws.client;
 
 import es.art83.ticTacToe.controllers.OpenGameController;
 
-public class OpenGameControllerWSClient extends ControllerWSClient implements OpenGameController {
+public class OpenControllerWSClient extends ControllerWSClient implements OpenGameController {
 
-    public OpenGameControllerWSClient(WebService webService, WSClientContext wSClientContext) {
-        super(webService, wSClientContext);
+    public OpenControllerWSClient(Integer contextId) {
+        super(contextId);
     }
 
     @Override

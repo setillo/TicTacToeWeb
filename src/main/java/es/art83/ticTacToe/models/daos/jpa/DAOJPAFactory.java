@@ -3,6 +3,7 @@ package es.art83.ticTacToe.models.daos.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import es.art83.ticTacToe.models.daos.ContextDAO;
 import es.art83.ticTacToe.models.daos.DAOFactory;
 import es.art83.ticTacToe.models.daos.GameDAO;
 import es.art83.ticTacToe.models.daos.PlayerDAO;
@@ -32,6 +33,11 @@ public class DAOJPAFactory extends DAOFactory {
     @Override
     public GameDAO getGameDAO() {
         return new GameDAOJPA();
+    }
+
+    @Override
+    public ContextDAO getContextDAO() {
+        return new ContextDAOJPA();
     }
 
 }

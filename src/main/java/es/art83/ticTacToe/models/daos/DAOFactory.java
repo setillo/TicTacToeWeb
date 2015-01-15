@@ -20,4 +20,6 @@ public abstract class DAOFactory {
     
     public abstract GameDAO getGameDAO();
     
+    public abstract ContextDAO getContextDAO();
+    
 }
