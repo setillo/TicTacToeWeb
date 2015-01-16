@@ -11,7 +11,7 @@ public class LogoutViewBean extends PlayerViewBean {
     public String logout() {
         LogoutController logoutController = this.getControllerFactory().getLogoutController();
         logoutController.logout();
-        LogManager.getLogger(logoutController.getClass().getName()).info("Usuario cerrado");
+        LogManager.getLogger("Bean:" + logoutController.getClass().getName()).info("logout");
         return "/login";
     }
 

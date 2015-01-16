@@ -154,7 +154,8 @@ public class GameViewBean extends ViewBean {
                 .getCreateGameControler();
         createGameController.createGame();
         this.update();
-        LogManager.getLogger(createGameController.getClass().getName()).info("Creado game");
+        LogManager.getLogger("Bean:" + createGameController.getClass().getName()).info(
+                "Creado game");
         return null;
     }
 
@@ -165,7 +166,7 @@ public class GameViewBean extends ViewBean {
             next = "logout";
         } else {
             logoutController.logout();
-            LogManager.getLogger(logoutController.getClass().getName()).info("Usuario cerrado");
+            LogManager.getLogger("Bean:" + logoutController.getClass().getName()).info("Usuario cerrado");
             next = "/login";
         }
         return next;
@@ -180,7 +181,7 @@ public class GameViewBean extends ViewBean {
         } else {
             placeCardController.placeCard(new CoordinateEntity(this.selectedDestinationCoordinate));
         }
-        LogManager.getLogger(placeCardController.getClass().getName()).info(
+        LogManager.getLogger("Bean:" + placeCardController.getClass().getName()).info(
                 "Place card: " + this.selectedSourceCoordinate + ">"
                         + this.selectedDestinationCoordinate);
         this.update();
@@ -194,7 +195,7 @@ public class GameViewBean extends ViewBean {
                     .getSaveGameController();
             saveGameController.saveGame();
             this.savedGame = true;
-            LogManager.getLogger(saveGameController.getClass().getName()).info(
+            LogManager.getLogger("Bean:" + saveGameController.getClass().getName()).info(
                     "Partida salvada: " + this.gameName);
 
         } else {
@@ -207,7 +208,7 @@ public class GameViewBean extends ViewBean {
         OpenGameController openGameController = this.getControllerFactory().getOpenGameController();
         openGameController.openGame(this.gameNameSelected);
         this.update();
-        LogManager.getLogger(openGameController.getClass().getName()).info("openGame");
+        LogManager.getLogger("Bean:" + openGameController.getClass().getName()).info("openGame");
         return null;
     }
 

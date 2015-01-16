@@ -6,9 +6,9 @@ import es.art83.ticTacToe.controllers.ShowGameController;
 import es.art83.ticTacToe.models.entities.CoordinateEntity;
 import es.art83.ticTacToe.models.utils.ColorModel;
 
-public class ShowControllerWSClient extends ControllerWSClient implements ShowGameController {
+public class ShowGameControllerWSClient extends ControllerWSClient implements ShowGameController {
 
-    public ShowControllerWSClient(Integer contextId) {
+    public ShowGameControllerWSClient(Integer contextId) {
         super(contextId);
     }
 

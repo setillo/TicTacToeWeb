@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 
 import es.art83.ticTacToe.models.daos.DAOFactory;
 import es.art83.ticTacToe.models.entities.ContextEntity;
+import es.art83.ticTacToe.models.entities.GameEntity;
 import es.art83.ticTacToe.models.entities.PlayerEntity;
 import es.art83.ticTacToe.models.utils.TicTacToeStateModel;
 
@@ -31,6 +32,7 @@ public class ContextResource {
         return ">>>Hola, desde RESTful";
     }
 
+    //FactoryController ---------- ---------- ---------- ---------- ---------- ----------
     @POST
     public Response create() {
         ContextEntity contextEntity = new ContextEntity();
@@ -41,6 +43,7 @@ public class ContextResource {
                 .entity(contextEntity.getId()).build();
     }
 
+    //LoginController ---------- ---------- ---------- ---------- ---------- ----------
     @Path("/{id}/player")
     @POST
     @Consumes(MediaType.APPLICATION_XML)
@@ -52,6 +55,7 @@ public class ContextResource {
             ContextEntity contextEntity = DAOFactory.getFactory().getContextDAO().read(id);
             if (contextEntity != null) {
                 contextEntity.setPlayer(playerEntityBD);
+                contextEntity.setTicTacToeStateModel(TicTacToeStateModel.CLOSED_GAME);
                 DAOFactory.getFactory().getContextDAO().update(contextEntity);
                 LogManager.getLogger(ContextResource.class).info(
                         "POST/" + contextEntity.getId() + "/player");
@@ -64,6 +68,22 @@ public class ContextResource {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
+    @Path("/{id}/logged")
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public String logged(@PathParam("id") Integer id) {
+        ContextEntity contextEntity = DAOFactory.getFactory().getContextDAO().read(id);
+        if (contextEntity != null) {
+            Boolean result = contextEntity.getPlayer() != null;
+            LogManager.getLogger(ContextResource.class).info(
+                    "GET/" + contextEntity.getId() + "/logged: " + result);
+            return Boolean.toString(result);
+        } else {
+            throw new NotFoundException("Context (" + id + ") no existe");
+        }
+    }
+
+    //LogoutController ---------- ---------- ---------- ---------- ---------- ----------
     @Path("/{id}/player")
     @DELETE
     @Consumes(MediaType.APPLICATION_XML)
@@ -80,22 +100,10 @@ public class ContextResource {
         }
     }
 
-    @Path("/{id}/logged")
-    @GET
-    public Response logged(@PathParam("id") Integer id) {
-        ContextEntity contextEntity = DAOFactory.getFactory().getContextDAO().read(id);
-        if (contextEntity != null) {
-            LogManager.getLogger(ContextResource.class).info(
-                    "GET/" + contextEntity.getId() + "/logged");
-            return Response.ok(contextEntity.getPlayer() != null).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-    }
 
     @Path("/{id}/isBye")
     @GET
+    @Produces(MediaType.APPLICATION_XML)
     public String isBye(@PathParam("id") Integer id) {
         ContextEntity contextEntity = DAOFactory.getFactory().getContextDAO().read(id);
         if (contextEntity != null) {
@@ -105,23 +113,46 @@ public class ContextResource {
                     "GET/" + contextEntity.getId() + "/isBye: " + result);
             return Boolean.toString(result);
         } else {
-            throw new NotFoundException("Context no existe");
+            throw new NotFoundException("Context (" + id + ") no existe");
         }
-
     }
 
     @Path("/{id}/savedGame")
     @GET
-    public Response savedGame(@PathParam("id") Integer id) {
+    @Produces(MediaType.APPLICATION_XML)
+    public String savedGame(@PathParam("id") Integer id) {
         ContextEntity contextEntity = DAOFactory.getFactory().getContextDAO().read(id);
         if (contextEntity != null) {
+            Boolean result = contextEntity.isSavedGame();
             LogManager.getLogger(ContextResource.class).info(
-                    "GET/" + contextEntity.getId() + "/savedGame");
-            return Response.ok(contextEntity.isSavedGame()).build();
+                    "GET/" + contextEntity.getId() + "/savedGame " + result);
+            return Boolean.toString(result);
+        } else {
+            throw new NotFoundException("Context (" + id + ") no existe");
+        }
+    }
+
+    //CreateGameController ---------- ---------- ---------- ---------- ---------- ----------
+    @Path("/{id}/game")
+    @POST
+    @Consumes(MediaType.APPLICATION_XML)
+    public Response createGame(@PathParam("id") Integer id) {
+        ContextEntity contextEntity = DAOFactory.getFactory().getContextDAO().read(id);
+        if (contextEntity != null) {
+            if (contextEntity.getPlayer() != null) {
+                GameEntity gameEntity = new GameEntity(contextEntity.getPlayer());
+                contextEntity.setGame(gameEntity);
+                contextEntity.setTicTacToeStateModel(TicTacToeStateModel.OPENED_GAME);
+                DAOFactory.getFactory().getContextDAO().update(contextEntity);
+                LogManager.getLogger(ContextResource.class).info(
+                        "POST/" + contextEntity.getId() + "/game");
+                return Response.created(URI.create("/contexts/" + contextEntity.getId() + "/game"))
+                        .build();
+            } else {
+                return Response.status(Response.Status.UNAUTHORIZED).build();
+            }
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
     }
-
 }

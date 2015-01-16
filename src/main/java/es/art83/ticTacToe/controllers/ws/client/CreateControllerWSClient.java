@@ -1,5 +1,8 @@
 package es.art83.ticTacToe.controllers.ws.client;
 
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
+
 import es.art83.ticTacToe.controllers.CreateGameController;
 
 public class CreateControllerWSClient extends ControllerWSClient implements CreateGameController {
@@ -10,8 +13,9 @@ public class CreateControllerWSClient extends ControllerWSClient implements Crea
 
     @Override
     public void createGame() {
-        // TODO Auto-generated method stub
-
+        WebTarget target = this.webTargetContext().path("game");
+        Response response = target.request().post(null);
+        response.close();
     }
 
 }

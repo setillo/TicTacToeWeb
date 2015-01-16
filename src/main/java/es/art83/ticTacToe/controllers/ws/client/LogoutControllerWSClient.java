@@ -14,7 +14,7 @@ public class LogoutControllerWSClient extends ControllerWSClient implements Logo
 
     @Override
     public void logout() {
-        WebTarget target = ControllerWSClient.webTargetServer().path("player");
+        WebTarget target = this.webTargetContext().path("player");
         Response response = target.request().delete();
         response.close();
     }
@@ -30,7 +30,7 @@ public class LogoutControllerWSClient extends ControllerWSClient implements Logo
     public boolean savedGame() {
         WebTarget target = this.webTargetContext().path("savedGame");
         Response response = target.request(MediaType.APPLICATION_XML).get();
-        return response.readEntity(Boolean.class); // response.close()
+        return Boolean.valueOf(response.readEntity(String.class)); // response.close()
     }
 
 }

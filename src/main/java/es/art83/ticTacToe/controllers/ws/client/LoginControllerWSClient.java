@@ -19,11 +19,8 @@ public class LoginControllerWSClient extends ControllerWSClient implements Login
         boolean result = false;
         WebTarget target = this.webTargetContext().path("player");
         Response response = target.request().post(Entity.xml(playerEntity));
-        if (Response.Status.OK.equals(response.getStatus())) {
-            result = true;
-        } else {
-            response.close();
-        }
+        result = Response.Status.Family.SUCCESSFUL.equals(response.getStatusInfo().getFamily());
+        response.close();
         return result;
     }
 
@@ -32,12 +29,11 @@ public class LoginControllerWSClient extends ControllerWSClient implements Login
         boolean result = false;
         WebTarget target = ControllerWSClient.webTargetServer().path("players");
         Response response = target.request().post(Entity.xml(playerEntity));
-        if (Response.Status.OK.equals(response.getStatus())) {
+        if (Response.Status.Family.SUCCESSFUL.equals(response.getStatusInfo().getFamily())) {
             this.login(playerEntity);
             result = this.login(playerEntity);
-        } else {
-            response.close();
         }
+        response.close();
         return result;
     }
 
@@ -45,7 +41,7 @@ public class LoginControllerWSClient extends ControllerWSClient implements Login
     public boolean logged() {
         WebTarget target = this.webTargetContext().path("logged");
         Response response = target.request(MediaType.APPLICATION_XML).get();
-        return response.readEntity(Boolean.class); // response.close()
+        return Boolean.valueOf(response.readEntity(String.class)); // response.close()
     }
 
 }

@@ -2,7 +2,6 @@ package es.art83.ticTacToe.controllers.ws.client;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
@@ -44,7 +43,7 @@ public class ControllerFactoryWSClient extends ControllerFactory {
         // Crear peticion rest para crear contexto. Almacenar la referencia del
         // contexto en el servidor
         WebTarget target = ControllerWSClient.webTargetServer().path("contexts");
-        Response response = target.request().post(Entity.xml(null));
+        Response response = target.request().post(null);
         contextId = response.readEntity(Integer.class);
 
         // Pasarle la referencia a todos los controladores
@@ -53,7 +52,7 @@ public class ControllerFactoryWSClient extends ControllerFactory {
         this.startGameController = new StartControllerWSClient(contextId);
         this.createGameController = new CreateControllerWSClient(contextId);
         this.nameGameController = new NameControllerWSClient(contextId);
-        this.showGameController = new ShowControllerWSClient(contextId);
+        this.showGameController = new ShowGameControllerWSClient(contextId);
         this.placeCardController = new PlaceControllerWSClient(contextId);
         this.saveGameController = new SaveControllerWSClient(contextId);
         this.openGameController = new OpenControllerWSClient(contextId);
