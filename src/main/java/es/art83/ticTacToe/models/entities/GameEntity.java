@@ -50,6 +50,10 @@ public class GameEntity {
         this(null, null);
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -85,6 +89,10 @@ public class GameEntity {
     public boolean isGameOver() {
         return this.board.existTicTacToe();
     }
+    
+    public List<PieceEntity> allPieces(){
+        return this.board.getPieces();
+    }
 
     public ColorModel[][] completeBoard() {
         return this.board.completeBoard();
@@ -118,6 +126,10 @@ public class GameEntity {
     public void placeCard(CoordinateEntity source, CoordinateEntity destination) {
         this.board.remove(source);
         this.placeCard(destination);
+    }
+    
+    public void deleteCard(CoordinateEntity source){
+        this.board.remove(source);
     }
 
     public void update(GameEntity game) {

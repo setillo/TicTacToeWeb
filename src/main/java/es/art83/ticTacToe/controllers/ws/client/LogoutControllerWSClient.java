@@ -27,7 +27,7 @@ public class LogoutControllerWSClient extends ControllerWSClient implements Logo
     }
 
     @Override
-    public boolean savedGame() {
+    public boolean isSavedGame() {
         WebTarget target = this.webTargetContext().path("savedGame");
         Response response = target.request(MediaType.APPLICATION_XML).get();
         return Boolean.valueOf(response.readEntity(String.class)); // response.close()

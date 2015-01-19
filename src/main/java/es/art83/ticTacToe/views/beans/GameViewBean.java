@@ -162,7 +162,7 @@ public class GameViewBean extends ViewBean {
     public String logout() {
         String next = null;
         LogoutController logoutController = this.getControllerFactory().getLogoutController();
-        if (!logoutController.savedGame()) {
+        if (!logoutController.isSavedGame()) {
             next = "logout";
         } else {
             logoutController.logout();

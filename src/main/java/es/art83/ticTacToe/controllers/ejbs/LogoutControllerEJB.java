@@ -29,7 +29,7 @@ public class LogoutControllerEJB extends ControllerEJB implements LogoutControll
     }
 
     @Override
-    public boolean savedGame() {
+    public boolean isSavedGame() {
         return this.getTicTacToeContext().isSavedGame();
     }
 

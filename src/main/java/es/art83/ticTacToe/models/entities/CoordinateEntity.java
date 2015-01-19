@@ -9,9 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import es.art83.ticTacToe.models.utils.DirectionModel;
 
+@XmlRootElement
 @Entity
 public class CoordinateEntity {
     public static final int MIN = 0;
@@ -45,6 +47,10 @@ public class CoordinateEntity {
 
     public CoordinateEntity() {
         this(0, 0);
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public int getRow() {
